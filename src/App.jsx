@@ -15,7 +15,7 @@ import MijnFavorieten from './pages/favoritesPage/MijnFavorieten';
 import Login from './pages/loginPage/Login';
 import SignUp from './pages/signUpPage/SignUp';
 import Account from './pages/accountPage/Account';
-import GeneralInfo from './pages/generalInfoPage/GeneralInfo';
+import AlgemeneInfo from './pages/algemeneInfoPage/AlgemenInfo';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
 function App() {
@@ -40,7 +40,7 @@ function App() {
         <Route path="/mijn-account" element={<Login />} />
         <Route path="/registreren" element={<SignUp />} />
         <Route path="/account" element={<ProtectedRoute element={Account} />} />
-        <Route path="/algemene-informatie" element={<GeneralInfo />} />
+        <Route path="/algemene-informatie" element={<AlgemeneInfo />} />
       </Routes>
       <Footer />
     </Router>

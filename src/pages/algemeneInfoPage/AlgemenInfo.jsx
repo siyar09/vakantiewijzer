@@ -1,5 +1,5 @@
 import React from 'react';
-import './GeneralInfo.css';
+import './AlgemeneInfo.css';
 
 const GeneralInfo = () => {
   return (
@@ -9,7 +9,7 @@ const GeneralInfo = () => {
       
       <h2>Hoe werkt het?</h2>
       <hr />
-      <p>Onze intelligente quiz stelt je een aantal gerichte vragen over je reisvoorkeuren, zoals het gewenste klimaat, de afstand die je wilt reizen en de activiteiten die je wilt ondernemen. Op basis van je antwoorden analyseren wij de beste match en geven we je gepersonaliseerde aanbevelingen voor vakantiebestemmingen.</p>
+      <p>Onze intelligente keuzehulp stelt je een aantal gerichte vragen over je reisvoorkeuren, zoals het gewenste klimaat, de afstand die je wilt reizen en of je van activiteiten houdt. Op basis van je antwoorden analyseren wij de beste match en geven we je gepersonaliseerde aanbevelingen voor vakantiebestemmingen.</p>
       
       <h2>Waarom worden de bestemmingen in het Engels weergegeven?</h2>
       <hr />

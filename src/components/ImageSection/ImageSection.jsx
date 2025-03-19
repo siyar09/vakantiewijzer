@@ -6,7 +6,7 @@ const ImageSection = () => {
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
-    navigate('/quiz');
+    navigate('/keuzehulp');
   };
 
   return (

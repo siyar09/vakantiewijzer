@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -32,11 +32,11 @@ const Navbar = () => {
     <nav className="navbar">
       <h2>VakantieWijzer</h2>
       <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/bestemmingen">Bestemmingen</Link></li>
-        <li><Link to="/keuzehulp">Keuzehulp</Link></li>
-        <li><Link to="/reis-check">Reis Check</Link></li>
-        <li><Link to="/mijn-favorieten">Mijn Favorieten</Link></li>
+        <li><NavLink to="/">Home</NavLink></li>
+        <li><NavLink to="/bestemmingen">Bestemmingen</NavLink></li>
+        <li><NavLink to="/keuzehulp">Keuzehulp</NavLink></li>
+        <li><NavLink to="/reis-check">Reis Check</NavLink></li>
+        <li><NavLink to="/mijn-favorieten">Mijn Favorieten</NavLink></li>
         <li className="account-dropdown">
           <button
             className="account-button"
@@ -46,7 +46,7 @@ const Navbar = () => {
           </button>
           {dropdownVisible && (
             <div className="dropdown-menu">
-              <Link to="/account">Accountoverzicht</Link>
+              <NavLink to="/account">Accountoverzicht</NavLink>
               <button onClick={handleLogout}>Uitloggen</button>
             </div>
           )}
