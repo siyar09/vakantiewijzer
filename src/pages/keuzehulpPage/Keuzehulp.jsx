@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Keuzehulp.css';
-import countries from '../../components/Countries/Countries.js';
+import countries from '../../data/Countries.js';
 import descriptions from '../../data/descriptions.json';
 import Modal from '../../components/Modal/Modal.jsx';
 import Question from '../../components/Question/Question.jsx';

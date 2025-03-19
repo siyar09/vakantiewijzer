@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import countries from '../components/Countries/Countries';
+import countries from '../data/Countries';
 import { fetchExchangeRate, calculatePriceDifference } from '../components/BudgetCategory/BudgetCategory';
 import { determineBestTravelTime } from '../components/BestTravelTime/BestTravelTime';
 
@@ -75,9 +75,8 @@ const useCityData = () => {
     setFilteredCityData(data);
   }, [searchTerm, filters, sort, cityData]);
 
-  const handleSearch = (event) => {
-    const searchTerm = event.target.value.toLowerCase();
-    setSearchTerm(searchTerm);
+  const handleSearch = (searchTerm) => {
+    setSearchTerm(searchTerm.toLowerCase());
   };
 
   const handleFilterChange = (filterType, value) => {

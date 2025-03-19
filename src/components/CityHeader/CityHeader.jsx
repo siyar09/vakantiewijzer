@@ -1,5 +1,5 @@
 import React from 'react';
-import countries from '../Countries/Countries';
+import countries from '../../data/Countries';
 
 const CityHeader = ({ city, country }) => {
   const getCountryCode = () => {

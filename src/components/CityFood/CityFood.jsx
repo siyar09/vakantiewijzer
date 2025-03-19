@@ -37,7 +37,7 @@ const CityFood = ({ city, nationality }) => {
 
   return (
     <div className='city-food'>
-      <h2>Eten & Drinken</h2>
+      <h2>Lokale gerechten</h2>
       <hr />
       {food.length > 0 ? (
         <ul>

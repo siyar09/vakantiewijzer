@@ -4,7 +4,7 @@ import CityReviews from '../CityReviews/CityReviews';
 import BestTravelTime from '../BestTravelTime/BestTravelTime';
 import BudgetCategory from '../BudgetCategory/BudgetCategory';
 import descriptions from '../../data/descriptions.json';
-import countries from '../Countries/Countries';
+import countries from '../../data/Countries';
 
 const CityInfo = ({ city, country, bestTravelTime, budget }) => {
   const [language, setLanguage] = useState('');

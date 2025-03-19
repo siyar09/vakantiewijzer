@@ -8,7 +8,7 @@ import CityMap from '../../components/CityMap/CityMap';
 import TravelAdvice from '../../components/TravelAdvice/TravelAdvice';
 import CityReviewsFromPeople from '../../components/CityReviewsFromPeople/CityReviewsFromPeople';
 import CityImage from '../../components/CityImage/CityImage';
-import countries from '../../components/Countries/Countries';
+import countries from '../../data/Countries';
 import FavoriteButton from '../../components/FavoriteButton/FavoriteButton';
 import './CityDetail.css';
 import 'leaflet/dist/leaflet.css';

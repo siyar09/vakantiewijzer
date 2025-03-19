@@ -16,7 +16,7 @@ import Login from './pages/loginPage/Login';
 import SignUp from './pages/signUpPage/SignUp';
 import Account from './pages/accountPage/Account';
 import GeneralInfo from './pages/generalInfoPage/GeneralInfo';
-import ProtectedRoute from './components/ProtectedRoute';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
 function App() {
   return (
