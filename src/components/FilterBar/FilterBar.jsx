@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { TRAVEL_TIMES } from '../BestTravelTime/BestTravelTime';
 import './FilterBar.css';
 
 const FilterBar = ({ handleFilterChange, handleSortChange, handleResetFilters }) => {
@@ -19,10 +20,9 @@ const FilterBar = ({ handleFilterChange, handleSortChange, handleResetFilters })
             Beste reisperiode:
             <select onChange={(e) => handleFilterChange('bestTime', e.target.value)}>
               <option value="">Alle</option>
-              <option value="zomer">Zomer</option>
-              <option value="winter">Winter</option>
-              <option value="lente">Lente</option>
-              <option value="herfst">Herfst</option>
+              <option value={TRAVEL_TIMES.SUMMER}>{TRAVEL_TIMES.SUMMER}</option>
+              <option value={TRAVEL_TIMES.SPRING_FALL}>{TRAVEL_TIMES.SPRING_FALL}</option>
+              <option value={TRAVEL_TIMES.FALL_SUMMER}>{TRAVEL_TIMES.FALL_SUMMER}</option>
             </select>
           </label>
           <label>

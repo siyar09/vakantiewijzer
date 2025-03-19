@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Keuzehulp.css';
 import countries from '../../data/Countries.js';
 import descriptions from '../../data/descriptions.json';
@@ -7,6 +7,7 @@ import Question from '../../components/Question/Question.jsx';
 import ProgressBar from '../../components/ProgressBar/ProgressBar.jsx';
 import Recommendation from '../../components/Recommendation/Recommendation.jsx';
 import questions from '../../data/Questions.js';
+import { fetchExchangeRate, calculatePriceDifference } from '../../components/BudgetCategory/BudgetCategory';
 
 const Quiz = () => {
   const [isQuizStarted, setIsQuizStarted] = useState(false);
@@ -37,49 +38,69 @@ const Quiz = () => {
     }
   };
 
-  const getRecommendations = () => {
-    const recommendations = countries.map(country => {
-      let score = 0;
+  const getRecommendations = async () => {
+    try {
+      const nlExchangeRate = await fetchExchangeRate('EUR');
+      
+      const recommendationsPromises = countries.map(async country => {
+        let score = 0;
 
-      if (answers[0] === 0 && country.temperature === 'Warm') score++;
-      if (answers[0] === 1 && country.temperature === 'Gematigd') score++;
-      if (answers[0] === 2 && country.temperature === 'Koel') score++;
+        if (answers[0] === 0 && country.temperature === 'Warm') score += 2;
+        if (answers[0] === 1 && country.temperature === 'Gematigd') score += 2;
+        if (answers[0] === 2 && country.temperature === 'Koel') score += 2;
 
-      if (answers[1] === 0 && country.locationType === 'Binnen Nederland') score++;
-      if (answers[1] === 1 && country.locationType === 'Binnen Europa') score++;
-      if (answers[1] === 2 && country.locationType === 'Buiten Europa') score++;
+        if (answers[1] === 0 && country.locationType === 'Binnen Nederland') score += 2;
+        if (answers[1] === 1 && country.locationType === 'Binnen Europa') score += 2;
+        if (answers[1] === 2 && country.locationType === 'Buiten Europa') score += 2;
 
-      if (answers[3] === 0 && country.hasBeach === true) score++;
-      if (answers[3] === 1 && country.hasBeach === false) score++;
+        if (answers[3] === 0 && country.hasBeach === true) score += 2;
+        if (answers[3] === 1 && country.hasBeach === false) score += 2;
 
-      if (answers[4] === 0 && country.isBusy === false) score++;
-      if (answers[4] === 1 && country.isBusy === true) score++;
+        if (answers[4] === 0 && country.isBusy === false) score += 2;
+        if (answers[4] === 1 && country.isBusy === true) score += 2;
 
-      if (answers[5] === 0 && country.active === true) score++;
-      if (answers[5] === 1 && country.active === false) score++;
+        if (answers[5] === 0 && country.active === true) score += 2;
+        if (answers[5] === 1 && country.active === false) score += 2;
 
-      const currentWeather = "4°C, broken clouds";
-      const description = descriptions[country.city] || "Geen beschrijving beschikbaar.";
+        // Calculate budget
+        const cityExchangeRate = await fetchExchangeRate(country.currencyCode);
+        const budget = calculatePriceDifference(cityExchangeRate, nlExchangeRate);
 
-      const recommendation = { ...country, score, currentWeather, bestTravelTime: country.bestTravelTime, budget: country.budget, description };
-      console.log(recommendation); // Voeg deze regel toe om de aanbevelingen te loggen
-      return recommendation;
-    });
+        const currentWeather = "4°C, broken clouds";
+        const description = descriptions[country.city] || "Geen beschrijving beschikbaar.";
 
-    recommendations.sort((a, b) => b.score - a.score);
-    return recommendations.slice(0, 5);
+        return {
+          ...country,
+          score,
+          currentWeather,
+          bestTravelTime: country.bestTravelTime,
+          budget: budget,
+          description
+        };
+      });
+
+      const recommendations = await Promise.all(recommendationsPromises);
+      recommendations.sort((a, b) => b.score - a.score);
+      return recommendations.slice(0, 5);
+    } catch (error) {
+      console.error('Error calculating recommendations:', error);
+      return [];
+    }
   };
 
-  const handleFinishClick = () => {
+  const handleFinishClick = async () => {
     setShowModal(true);
     setIsLoading(true);
-    setTimeout(() => {
-      const topRecommendations = getRecommendations();
+    try {
+      const topRecommendations = await getRecommendations();
       setRecommendations(topRecommendations);
       setCurrentQuestion(questions.length);
+    } catch (error) {
+      console.error('Error getting recommendations:', error);
+    } finally {
       setIsLoading(false);
       setShowModal(false);
-    }, 3000);
+    }
   };
 
   const handleStartClick = () => {
@@ -97,7 +118,9 @@ const Quiz = () => {
       {!isQuizStarted && (
         <>
           <h1>Welkom bij de keuzehulp!</h1>
-          <button className="start-button" onClick={handleStartClick}>Dit is het begin van jou vakantie!</button>
+          <button className="start-button" onClick={handleStartClick}>
+            Dit is het begin van jou vakantie!
+          </button>
         </>
       )}
       {isQuizStarted && (
@@ -112,11 +135,17 @@ const Quiz = () => {
               onAnswerClick={handleAnswerClick}
             />
             <div className="navigation-buttons">
-              <button className="prev" onClick={handlePrevClick} disabled={currentQuestion === 0}>← Vorige</button>
+              <button className="prev" onClick={handlePrevClick} disabled={currentQuestion === 0}>
+                ← Vorige
+              </button>
               {currentQuestion < questions.length - 1 ? (
-                <button className="next" onClick={handleNextClick} disabled={selectedAnswer === null}>Volgende →</button>
+                <button className="next" onClick={handleNextClick} disabled={selectedAnswer === null}>
+                  Volgende →
+                </button>
               ) : (
-                <button className="next" onClick={handleFinishClick} disabled={selectedAnswer === null}>Voltooien</button>
+                <button className="next" onClick={handleFinishClick} disabled={selectedAnswer === null}>
+                  Voltooien
+                </button>
               )}
             </div>
           </>

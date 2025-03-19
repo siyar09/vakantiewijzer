@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './CityImage.css';
 
-const PIXABAY_API_KEY = '49266589-67ed3180b1e61f35d24a8b713';
+const PIXABAY_API_KEY = import.meta.env.VITE_APP_PIXABAY_API_KEY;
 
 const CityImage = React.memo(({ city, className }) => {
   const [imageUrl, setImageUrl] = useState('');

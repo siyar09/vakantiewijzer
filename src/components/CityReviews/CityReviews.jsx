@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const YELP_API_KEY = 'YvnkpV5h58qTY26PFipZdByT5lplovr6MUgRymqZRNxPiF8gnz8gHhLOA7qs338m147GK0X94ENvuUgkxwnulX0C0GO3Vr0r4Qz7VnJSd9HXikV06LT1IszVqLrSZ3Yx';
+const YELP_API_KEY = import.meta.env.VITE_APP_YELP_API_KEY;
 
 const cache = {};
 

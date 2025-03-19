@@ -6,6 +6,8 @@ import BudgetCategory from '../BudgetCategory/BudgetCategory';
 import descriptions from '../../data/descriptions.json';
 import countries from '../../data/Countries';
 
+const WEATHER_API_KEY = import.meta.env.VITE_APP_WEATHER_API_KEY;
+
 const CityInfo = ({ city, country, bestTravelTime, budget }) => {
   const [language, setLanguage] = useState('');
   const [climate, setClimate] = useState('');
@@ -13,13 +15,14 @@ const CityInfo = ({ city, country, bestTravelTime, budget }) => {
   const [description, setDescription] = useState('');
   const [flag, setFlag] = useState('');
   const [countryName, setCountryName] = useState('');
+  const [temperature, setTemperature] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const [countryResponse, weatherResponse, descriptionResponse] = await Promise.all([
           fetch(`https://restcountries.com/v3.1/name/${country}?fields=languages,currencies,flags`),
-          fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=385974b44bbc42e1758a483f6186cf8d&units=metric`),
+          fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${WEATHER_API_KEY}&units=metric`),
           fetch(`https://en.wikivoyage.org/w/api.php?action=query&prop=extracts&exintro&titles=${city}&format=json&origin=*`)
         ]);
 
@@ -41,13 +44,14 @@ const CityInfo = ({ city, country, bestTravelTime, budget }) => {
         const weatherData = await weatherResponse.json();
         if (weatherData && weatherData.weather && weatherData.weather.length > 0) {
           setClimate(weatherData.weather[0].description);
+          setTemperature(Math.round(weatherData.main.temp)); // Add temperature state
         }
 
         const descriptionData = await descriptionResponse.json();
         const page = descriptionData.query.pages[Object.keys(descriptionData.query.pages)[0]];
         if (page && page.extract) {
           const shortDescription = page.extract.substring(0, 500);
-          const cleanDescription = shortDescription.replace(/<\/?[^>]+(>|$)/g, ""); // Verwijder HTML-tags
+          const cleanDescription = shortDescription.replace(/<\/?[^>]+(>|$)/g, "");
           setDescription(cleanDescription);
         } else if (page && page.extract.includes("There is more than one place called")) {
           const fallbackDescription = descriptions[city] || 'Geen beschrijving beschikbaar.';
@@ -65,7 +69,6 @@ const CityInfo = ({ city, country, bestTravelTime, budget }) => {
 
     fetchData();
 
-    // Haal de naam van het land op uit het countries bestand
     const countryInfo = countries.find(c => c.city === city);
     if (countryInfo) {
       setCountryName(countryInfo.countryNL);
@@ -80,8 +83,8 @@ const CityInfo = ({ city, country, bestTravelTime, budget }) => {
       <p><strong>Locatie:</strong> {countryName}</p>
       <CityWeather city={city} />
       <p><strong>Weertype:</strong> {climate || 'Laden...'}</p>
-      <BestTravelTime bestTravelTime={bestTravelTime} />
-      <BudgetCategory budget={budget} /> {/* Controleer of budget hier correct wordt weergegeven */}
+      <BestTravelTime temperature={temperature} />      
+      <BudgetCategory budget={budget} />
       <p><strong>Taal:</strong> {language || 'Laden...'}</p>
       <p><strong>Munteenheid:</strong> {currency}</p>
       <CityReviews city={city} />
