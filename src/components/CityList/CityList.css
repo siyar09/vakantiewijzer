@@ -1,0 +1,12 @@
+.city-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .city-item {
+    display: flex;
+    justify-content: center;
+  }

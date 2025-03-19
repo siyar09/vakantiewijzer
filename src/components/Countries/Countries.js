@@ -1,0 +1,38 @@
+const countries = [
+  { city: 'Vienna', country: 'Austria', countryNL: 'Oostenrijk', countryCode: 'AT', currencyCode: 'EUR', nationality: 'European', locationType: 'Binnen Europa', hasBeach: false, isBusy: false, active: true, temperature: 'Koel' },
+  { city: 'Zurich', country: 'Switzerland', countryNL: 'Zwitserland', countryCode: 'CH', currencyCode: 'CHF', nationality: 'European', locationType: 'Binnen Europa', hasBeach: false, isBusy: false, active: true, temperature: 'Koel'  },
+  { city: 'Berlin', country: 'Germany', countryNL: 'Duitsland', countryCode: 'DE', currencyCode: 'EUR', nationality: 'European', locationType: 'Binnen Europa', hasBeach: true, isBusy: true, active: true, temperature: 'Koel'  },
+  { city: 'Sydney', country: 'Australia', countryNL: 'Australie', countryCode: 'AU', currencyCode: 'AUD', nationality: 'British', locationType: 'Buiten Europa', hasBeach: true, isBusy: true, active: true, temperature: 'Gematigd'  },
+  { city: 'Brussels', country: 'Belgium', countryNL: 'Belgie', countryCode: 'BE', currencyCode: 'EUR', nationality: 'European', locationType: 'Binnen Europa', hasBeach: true, isBusy: false, active: true, temperature: 'Gematigd'  },
+  { city: 'Toronto', country: 'Canada', countryNL: 'Canada', countryCode: 'CA', currencyCode: 'CAD', nationality: 'Canadian', locationType: 'Buiten Europa', hasBeach: true, isBusy: true, active: true, temperature: 'Gematigd'  },
+  { city: 'London', country: 'United Kingdom', countryNL: 'Verenigd Koninkrijk', countryCode: 'GB', currencyCode: 'GBP', nationality: 'British', locationType: 'Binnen Europa', hasBeach: true, isBusy: true, active: true, temperature: 'Gematigd' },
+  { city: 'Hong Kong', country: 'China', countryNL: 'China', countryCode: 'HK', currencyCode: 'HKD', nationality: 'Chinese', locationType: 'Buiten Europa', hasBeach: true, isBusy: true, active: true, temperature: 'Warm'  },
+  { city: 'Dublin', country: 'Republic of Ireland', countryNL: 'Ierland', countryCode: 'IE', currencyCode: 'EUR', nationality: 'Irish', locationType: 'Binnen Europa', hasBeach: true, isBusy: false, active: true, temperature: 'Gematigd'  },
+  { city: 'Kuala Lumpur', country: 'Malaysia', countryNL: 'Maleisie', countryCode: 'MY', currencyCode: 'MYR', nationality: 'Malaysian', locationType: 'Buiten Europa', hasBeach: true, isBusy: false, active: true, temperature: 'Warm'  },
+  { city: 'Auckland', country: 'New Zealand', countryNL: 'Nieuw-Zeeland', countryCode: 'NZ', currencyCode: 'NZD', nationality: 'British', locationType: 'Buiten Europa', hasBeach: true, isBusy: false, active: true, temperature: 'Gematigd'  },
+  { city: 'Manila', country: 'Philippines', countryNL: 'Filipijnen', countryCode: 'PH', currencyCode: 'PHP', nationality: 'Asian', locationType: 'Buiten Europa', hasBeach: true, isBusy: true, active: true, temperature: 'Warm'  },
+  { city: 'Singapore', country: 'Singapore', countryNL: 'Singapore', countryCode: 'SG', currencyCode: 'SGD', nationality: 'Singaporean', locationType: 'Buiten Europa', hasBeach: true, isBusy: true, active: true, temperature: 'Warm'  },
+  { city: 'New York', country: 'United States', countryNL: 'Verenigde Staten van Amerika', countryCode: 'US', currencyCode: 'USD', nationality: 'American', locationType: 'Buiten Europa', hasBeach: true, isBusy: true, active: true, temperature: 'Gematigd'  },
+  { city: 'Buenos Aires', country: 'Argentina', countryNL: 'Argentinie', countryCode: 'AR', currencyCode: 'ARS', nationality: 'Latin American', locationType: 'Buiten Europa', hasBeach: true, isBusy: true, active: true, temperature: 'Warm'  },
+  { city: 'Santiago', country: 'Chile', countryNL: 'Chili', countryCode: 'CL', currencyCode: 'CLP', nationality: 'Chilean', locationType: 'Buiten Europa', hasBeach: true, isBusy: false, active: true, temperature: 'Warm'  },
+  { city: 'Madrid', country: 'Spain', countryNL: 'Spanje', countryCode: 'ES', currencyCode: 'EUR', nationality: 'Spanish', locationType: 'Binnen Europa', hasBeach: true, isBusy: true, active: true, temperature: 'Warm'  },
+  { city: 'Mexico City', country: 'Mexico', countryNL: 'Mexico', countryCode: 'MX', currencyCode: 'MXN', nationality: 'Mexican', locationType: 'Buiten Europa', hasBeach: true, isBusy: false, active: true, temperature: 'Warm'  },
+  { city: 'Helsinki', country: 'Finland', countryNL: 'Finland', countryCode: 'FI', currencyCode: 'EUR', nationality: 'Nordic', locationType: 'Binnen Europa', hasBeach: true, isBusy: false, active: true, temperature: 'Gematigd'  },
+  { city: 'Paris', country: 'France', countryNL: 'Frankrijk', countryCode: 'FR', currencyCode: 'EUR', nationality: 'French', locationType: 'Binnen Europa', hasBeach: true, isBusy: false, active: true, temperature: 'Gematigd'  },
+  { city: 'Rome', country: 'Italy', countryNL: 'Italie', countryCode: 'IT', currencyCode: 'EUR', nationality: 'Italian', locationType: 'Binnen Europa', hasBeach: true, isBusy: true, active: true, temperature: 'Gematigd'  },
+  { city: 'Tokyo', country: 'Japan', countryNL: 'Japan', countryCode: 'JP', currencyCode: 'JPY', nationality: 'Japanese', locationType: 'Buiten Europa', hasBeach: true, isBusy: true, active: true, temperature: 'Gematigd'  },
+  { city: 'Oslo', country: 'Norway', countryNL: 'Noorwegen', countryCode: 'NO', currencyCode: 'NOK', nationality: 'Nordic', locationType: 'Binnen Europa', hasBeach: true, isBusy: false, active: true, temperature: 'koel'  },
+  { city: 'Amsterdam', country: 'The Netherlands', countryNL: 'Nederland', countryCode: 'NL', currencyCode: 'EUR', nationality: 'Dutch', locationType: 'Binnen Nederland', hasBeach: true, isBusy: true, active: true, temperature: 'Gematigd'  },
+  { city: 'Warsaw', country: 'Poland', countryNL: 'Polen', countryCode: 'PL', currencyCode: 'PLN', nationality: 'Eastern European', locationType: 'Binnen Europa', hasBeach: true, isBusy: false, active: true, temperature: 'Gematigd'  },
+  { city: 'São Paulo', country: 'Brazil', countryNL: 'Brazilie', countryCode: 'BR', currencyCode: 'BRL', nationality: 'Latin American', locationType: 'Buiten Europa', hasBeach: true, isBusy: true, active: true, temperature: 'Warm'  },
+  { city: 'Lisbon', country: 'Portugal', countryNL: 'Portugal', countryCode: 'PT', currencyCode: 'EUR', nationality: 'Mediterranean', locationType: 'Binnen Europa', hasBeach: true, isBusy: true, active: true, temperature: 'Warm'  },
+  { city: 'Stockholm', country: 'Sweden', countryNL: 'Zweden', countryCode: 'SE', currencyCode: 'SEK', nationality: 'Nordic', locationType: 'Binnen Europa', hasBeach: true, isBusy: false, active: true, temperature: 'Gematigd'  },
+  { city: 'Istanbul', country: 'Turkey', countryNL: 'Turkije', countryCode: 'TR', currencyCode: 'TRY', nationality: 'Turkish', locationType: 'Buiten Europa', hasBeach: true, isBusy: true, active: true, temperature: 'Warm'  },
+  { city: 'Taipei', country: 'Taiwan', countryNL: 'Taiwan', countryCode: 'TW', currencyCode: 'TWD', nationality: 'Thai', locationType: 'Buiten Europa', hasBeach: true, isBusy: true, active: true, temperature: 'Warm'  },
+  { city: 'Prague', country: 'Czech Republic', countryNL: 'Tsjechie', countryCode: 'CZ', currencyCode: 'CZK', nationality: 'Eastern European', locationType: 'Binnen Europa', hasBeach: false, isBusy: false, active: true, temperature: 'Gematigd'  },
+  { city: 'Copenhagen', country: 'Denmark', countryNL: 'Denemarken', countryCode: 'DK', currencyCode: 'DKK', nationality: 'Nordic', locationType: 'Binnen Europa', hasBeach: true, isBusy: false, active: true, temperature: 'Gematigd'  },
+  { city: 'Athens', country: 'Greece', countryNL: 'Griekenland', countryCode: 'GR', currencyCode: 'EUR', nationality: 'Greek', locationType: 'Binnen Europa', hasBeach: true, isBusy: true, active: true, temperature: 'Warm'  }
+];
+
+
+export default countries;

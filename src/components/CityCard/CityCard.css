@@ -1,0 +1,66 @@
+.city-card {
+  display: flex;
+  align-items: flex-start; /* Zorg ervoor dat de items bovenaan worden uitgelijnd */
+  background-color: #fff;
+  color: #000000;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding: 15px;
+  transition: transform 0.2s;
+  width: 100%;
+  max-width: 1300px;
+  margin: 5px auto;
+}
+
+.city-image {
+  flex: 0 0 200px;
+  height: 200px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.city-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Zorg ervoor dat de H2 bovenaan staat */
+  flex: 1;
+  position: relative; /* Voeg deze regel toe */
+}
+
+.city-info h2 {
+  align-self: flex-start; /* Plaats de H2-tekst bovenaan */
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.city-description {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.city-info p {
+  margin: 4px 0;
+}
+
+.more-info-button {
+  background-color: #2d6a4f;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  position: absolute; /* Voeg deze regel toe */
+  margin-top: 250px;
+  right: 15px; /* Voeg deze regel toe */
+}
+
+.more-info-button:hover {
+  background-color: #1b4332;
+}
+
+.star-rating {
+  color: #ffcc00;
+  font-size: 1.2em;
+}

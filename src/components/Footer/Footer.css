@@ -1,0 +1,75 @@
+.footer {
+    background-color: rgb(64, 121, 73);
+    color: white;
+    padding: 1px 0;
+    text-align: center;
+    position: relative; /* Changed from fixed to relative */
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: auto; /* Push footer to bottom */
+}
+
+/* Remove the body margin since we don't need it anymore */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Rest of your footer styles remain the same */
+.footer * {
+    color: white;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.footer-left,
+.footer-right {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.footer-left {
+    justify-content: flex-start; /* Plaatst 'contact' helemaal links */
+    text-align: left;
+}
+
+.footer-right {
+    justify-content: flex-end; /* Plaatst 'volg ons' helemaal rechts */
+    text-align: right;
+}
+
+.footer-center {
+    text-align: center;
+    margin-top: 10px; /* Zorgt voor wat ruimte boven het copyright */
+    margin-bottom: 0;
+    width: 100%;
+}
+
+.footer-right p {
+    margin: 0; /* Verwijder standaard marge */
+    margin-right: 10px; /* Voeg marge toe aan de rechterkant voor ruimte tussen tekst en iconen */
+}
+
+.footer-right a {
+    margin-left: 10px;
+    display: inline-block; /* Zorgt ervoor dat de marges correct worden toegepast */
+}
+
+.footer-right img {
+    width: 46px;
+    height: 46px;
+    transition: transform 0.3s; /* Voeg een transitie toe voor een hover-effect */
+}
+
+.footer-right img:hover {
+    transform: scale(1.1); /* Vergroot de afbeelding iets bij hover */
+}

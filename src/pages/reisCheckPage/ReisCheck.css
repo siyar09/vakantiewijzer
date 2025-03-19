@@ -1,0 +1,100 @@
+.reis-check-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.reis-check-container h1 {
+  font-size: 2.8em;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.reis-check-container p {
+  font-size: 1.1em;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.notification-bar {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.notification-bar.show {
+  display: flex;
+}
+
+.checklist-section {
+  margin-bottom: 20px;
+}
+
+.checklist-section h2 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 1.8em;
+}
+
+.checklist-section hr {
+  margin-bottom: 20px;
+  border: none;
+  border-top: 1px solid #000000;
+}
+
+.checklist-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.checklist-section li {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+
+}
+
+.checklist-section input[type="checkbox"] {
+  margin-right: 10px;
+  width: 20px; /* Voeg deze regel toe */
+  height: 20px; /* Voeg deze regel toe */
+}
+
+.save-button {
+  padding: 12px 22px;
+  background-color: #3b833d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1em;
+  display: block;
+  margin: 40px auto;
+}
+
+.save-button:hover {
+  background-color: #235c26;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,53 @@
+.statistics {
+    display: flex;
+    justify-content: space-around;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .stat-item {
+    text-align: center;
+    flex: 1;
+    margin: 0 10px;
+  }
+  
+  .stat-item h2 {
+    font-size: 3em;
+    margin: 0;
+    color: #ff6347;
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  .stat-item p {
+    margin: 10px 0 0;
+    font-size: 1.2em;
+    color: #333;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .count {
+    animation: countUp 2s ease-in-out;
+  }
+  
+  @keyframes countUp {
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }

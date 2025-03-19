@@ -1,0 +1,183 @@
+h2 {
+    color: black;
+    margin-top: 20px;
+}
+
+.header-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 40px auto;
+    margin-bottom: 20px;
+}
+  
+.back-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+  
+.back-button:hover {
+    background-color: #0056b3;
+
+}
+  
+.favorite-button-container {
+    margin-left: 40px;
+}
+
+.city-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    color: black;
+}
+
+.city-header h1 {
+    font-size: 2.2em;
+}
+
+.country-flag {
+    width: 50px;
+    height: 40px;
+    border-radius: 4px;
+    margin-left: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.city-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border-radius: 15px;
+    max-width: 800px;
+    margin: 0 auto;
+    margin-bottom: 60px;
+    background-color: #f9f9f9;
+    color: black;
+
+
+}
+
+.city-detail > * {
+    width: 100%;
+}
+
+.city-image {
+    width: 450px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-right: 20px;
+}
+  
+.city-detail-image {
+    width: 100%;
+    max-height: 600px;
+    object-fit: cover;
+    border-radius: 30px;
+    box-shadow:  0 4px 8px 4px rgba(40, 40, 40, 0.1);
+
+}
+
+.city-detail-info {
+    padding: 20px;
+    border-radius: 15px;
+    width: 100%;
+    color: black;
+}
+
+
+.city-detail-info p, .city-detail-info ul {
+    margin: 10px 0;
+}
+
+.city-detail-info ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.city-activities, .city-food {
+    width: 100%;
+    margin-top: 20px;
+    color: black;
+}
+
+.city-food ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0;
+    list-style: none;
+}
+
+.city-food li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    flex-basis: calc(25% - 20px);
+}
+
+.food-image {
+    width: 180px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.city-detail-info hr {
+    border: 0;
+    height: 1px;
+    background: black;
+    margin: 20px 0;
+}
+
+.distance-calculator {
+    margin-top: 40px;
+    color: black;
+}
+
+.distance-calculator h3 {
+    color: black;
+}
+
+.distance-calculator input {
+    padding: 10px;
+    width: 200px;
+    margin-right: 10px;
+    border: 1px solid #ffffff;
+    color: black;
+    background-color: #d2d3d5d6;
+    border-radius: 4px;
+}
+
+.distance-calculator button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.distance-calculator button:hover {
+    background-color: #0056b3;
+}
+
+.review {
+    border: 1px solid #ddd;
+    color: black;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color: #efefef;
+}
+
