@@ -9,6 +9,10 @@ import countries from '../../data/Countries';
 
 const WEATHER_API_KEY = import.meta.env.VITE_APP_WEATHER_API_KEY;
 
+const capitalizeFirstLetter = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
 const CityInfo = ({ city, country, budget }) => {
   const [language, setLanguage] = useState('');
   const [climate, setClimate] = useState('');
@@ -31,7 +35,8 @@ const CityInfo = ({ city, country, budget }) => {
             params: {
               q: city,
               appid: WEATHER_API_KEY,
-              units: 'metric'
+              units: 'metric',
+              lang: 'nl'
             }
           }),
           axios.get('https://en.wikivoyage.org/w/api.php', {
@@ -65,7 +70,7 @@ const CityInfo = ({ city, country, budget }) => {
         // Handle weather data
         const weatherData = weatherResponse.data;
         if (weatherData && weatherData.weather && weatherData.weather.length > 0) {
-          setClimate(weatherData.weather[0].description);
+          setClimate(capitalizeFirstLetter(weatherData.weather[0].description));
           setTemperature(Math.round(weatherData.main.temp));
         }
 
@@ -76,9 +81,6 @@ const CityInfo = ({ city, country, budget }) => {
           const shortDescription = page.extract.substring(0, 500);
           const cleanDescription = shortDescription.replace(/<\/?[^>]+(>|$)/g, "");
           setDescription(cleanDescription);
-        } else if (page && page.extract?.includes("There is more than one place called")) {
-          const fallbackDescription = descriptions[city] || 'Geen beschrijving beschikbaar.';
-          setDescription(fallbackDescription);
         } else {
           const fallbackDescription = descriptions[city] || 'Geen beschrijving beschikbaar.';
           setDescription(fallbackDescription);

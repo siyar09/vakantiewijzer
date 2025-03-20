@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import CityHeader from '../../components/CityHeader/CityHeader';
 import CityInfo from '../../components/CityInfo/CityInfo';
-import CityActivities from '../../components/CityActivities/CityActivities';
+import CurrencyConverter from '../../components/CurrencyConverter/CurrencyConverter';
 import CityFood from '../../components/CityFood/CityFood';
 import CityMap from '../../components/CityMap/CityMap';
 import TravelAdvice from '../../components/TravelAdvice/TravelAdvice';
@@ -38,9 +38,9 @@ const CityDetail = () => {
           bestTravelTime={city.bestTravelTime} 
           budget={city.budget} // Controleer of budget hier correct wordt doorgegeven
         />
-        <CityActivities city={city.city} />
         <CityFood city={city.city} nationality={cityData?.nationality} />
         <CityMap city={city.city} country={city.country} />
+        <CurrencyConverter city={city.city} />
         <TravelAdvice cityData={cityData} city={city.city} />
         <CityReviewsFromPeople city={city.city} />
       </div>
