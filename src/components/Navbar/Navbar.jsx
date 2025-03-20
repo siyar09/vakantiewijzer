@@ -12,7 +12,7 @@ const Navbar = () => {
     if (dropdownVisible) {
       timeoutId = setTimeout(() => {
         setDropdownVisible(false);
-      }, 10000); // 10 seconds in milliseconds
+      }, 3000); // 10 seconds in milliseconds
     }
 
     // Cleanup function to clear timeout if component unmounts or dropdown is closed manually

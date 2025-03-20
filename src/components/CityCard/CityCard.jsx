@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import CityWeather from '../CityWeather/CityWeather';
 import CityImage from '../CityImage/CityImage';
 import BudgetCategory from '../BudgetCategory/BudgetCategory';
@@ -16,12 +17,16 @@ const CityCard = ({ city, showDetails, showDescriptionOnly }) => {
   useEffect(() => {
     const fetchTemperature = async () => {
       try {
-        const response = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?q=${city.city}&appid=${WEATHER_API_KEY}&units=metric`
-        );
-        const data = await response.json();
-        if (data?.main?.temp) {
-          setTemperature(Math.round(data.main.temp));
+        const response = await axios.get('https://api.openweathermap.org/data/2.5/weather', {
+          params: {
+            q: city.city,
+            appid: WEATHER_API_KEY,
+            units: 'metric'
+          }
+        });
+        
+        if (response.data?.main?.temp) {
+          setTemperature(Math.round(response.data.main.temp));
         }
       } catch (error) {
         console.error('Error fetching temperature:', error);

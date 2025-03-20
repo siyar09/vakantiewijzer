@@ -1,12 +1,12 @@
 import React from 'react';
+import axios from 'axios';
 
 const fetchExchangeRate = async (currencyCode) => {
   try {
-    const response = await fetch(`https://api.exchangerate-api.com/v4/latest/${currencyCode}`);
-    const data = await response.json();
-    return data?.rates?.EUR || null;
+    const response = await axios.get(`https://api.exchangerate-api.com/v4/latest/${currencyCode}`);
+    return response.data?.rates?.EUR || null;
   } catch (error) {
-    console.error(`Fout bij het ophalen van wisselkoers voor ${currencyCode}:`, error);
+    console.error(`Fout bij het ophalen van wisselkoers voor ${currencyCode}:`, error.response?.data || error.message);
     return null;
   }
 };

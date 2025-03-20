@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import CityWeather from '../CityWeather/CityWeather';
 import CityReviews from '../CityReviews/CityReviews';
 import BestTravelTime from '../BestTravelTime/BestTravelTime';
@@ -8,7 +9,7 @@ import countries from '../../data/Countries';
 
 const WEATHER_API_KEY = import.meta.env.VITE_APP_WEATHER_API_KEY;
 
-const CityInfo = ({ city, country, bestTravelTime, budget }) => {
+const CityInfo = ({ city, country, budget }) => {
   const [language, setLanguage] = useState('');
   const [climate, setClimate] = useState('');
   const [currency, setCurrency] = useState('');
@@ -21,39 +22,61 @@ const CityInfo = ({ city, country, bestTravelTime, budget }) => {
     const fetchData = async () => {
       try {
         const [countryResponse, weatherResponse, descriptionResponse] = await Promise.all([
-          fetch(`https://restcountries.com/v3.1/name/${country}?fields=languages,currencies,flags`),
-          fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${WEATHER_API_KEY}&units=metric`),
-          fetch(`https://en.wikivoyage.org/w/api.php?action=query&prop=extracts&exintro&titles=${city}&format=json&origin=*`)
+          axios.get(`https://restcountries.com/v3.1/name/${country}`, {
+            params: {
+              fields: 'languages,currencies,flags'
+            }
+          }),
+          axios.get('https://api.openweathermap.org/data/2.5/weather', {
+            params: {
+              q: city,
+              appid: WEATHER_API_KEY,
+              units: 'metric'
+            }
+          }),
+          axios.get('https://en.wikivoyage.org/w/api.php', {
+            params: {
+              action: 'query',
+              prop: 'extracts',
+              exintro: true,
+              titles: city,
+              format: 'json',
+              origin: '*'
+            }
+          })
         ]);
 
-        const countryData = await countryResponse.json();
-        if (countryData && countryData.length > 0) {
-          if (countryData[0].languages) {
-            const languages = Object.values(countryData[0].languages).join(', ');
+        // Handle country data
+        if (countryResponse.data && countryResponse.data.length > 0) {
+          const countryData = countryResponse.data[0];
+          if (countryData.languages) {
+            const languages = Object.values(countryData.languages).join(', ');
             setLanguage(languages);
           }
-          if (countryData[0].currencies) {
-            const currencyCode = Object.keys(countryData[0].currencies)[0];
+          if (countryData.currencies) {
+            const currencyCode = Object.keys(countryData.currencies)[0];
             setCurrency(currencyCode);
           }
-          if (countryData[0].flags) {
-            setFlag(countryData[0].flags.png);
+          if (countryData.flags) {
+            setFlag(countryData.flags.png);
           }
         }
 
-        const weatherData = await weatherResponse.json();
+        // Handle weather data
+        const weatherData = weatherResponse.data;
         if (weatherData && weatherData.weather && weatherData.weather.length > 0) {
           setClimate(weatherData.weather[0].description);
-          setTemperature(Math.round(weatherData.main.temp)); // Add temperature state
+          setTemperature(Math.round(weatherData.main.temp));
         }
 
-        const descriptionData = await descriptionResponse.json();
+        // Handle description data
+        const descriptionData = descriptionResponse.data;
         const page = descriptionData.query.pages[Object.keys(descriptionData.query.pages)[0]];
         if (page && page.extract) {
           const shortDescription = page.extract.substring(0, 500);
           const cleanDescription = shortDescription.replace(/<\/?[^>]+(>|$)/g, "");
           setDescription(cleanDescription);
-        } else if (page && page.extract.includes("There is more than one place called")) {
+        } else if (page && page.extract?.includes("There is more than one place called")) {
           const fallbackDescription = descriptions[city] || 'Geen beschrijving beschikbaar.';
           setDescription(fallbackDescription);
         } else {

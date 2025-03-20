@@ -13,20 +13,20 @@ const FAQSection = () => {
       category: 'Over de Quiz',
       questions: [
         {
-          question: 'Hoe werkt de quiz?',
-          answer: 'De quiz helpt je bij het vinden van de perfecte vakantiebestemming door middel van een slimme vragenlijst die jouw voorkeuren analyseert.',
+          question: 'Hoe werkt de keuzehulp?',
+          answer: 'De keuzehulp helpt je bij het vinden van de perfecte vakantiebestemming door middel van een slimme vragenlijst die jouw voorkeuren analyseert.',
         },
         {
-          question: 'Is de quiz gratis?',
-          answer: 'Nee, de quiz is niet gratis. De Quiz is alleen te gebruiken voor gebruikers die lid van VakantieWijzer zijn.',
+          question: 'Is de keuzehulp gratis?',
+          answer: 'Ja, de keuzehulp is gratis. De keuzehulp is alleen te gebruiken voor gebruikers die lid van VakantieWijzer zijn.',
         },
         {
-          question: 'Hoe lang duurt de quiz?',
-          answer: 'De quiz duurt ongeveer 2 minuten om te voltooien.',
+          question: 'Hoe lang duurt de keuzehulp?',
+          answer: 'De keuzehulp duurt ongeveer 2 minuten om te voltooien.',
         },
         {
-          question: 'Kan ik de quiz opnieuw doen?',
-          answer: 'Ja, je kunt de quiz zo vaak doen als je wilt.',
+          question: 'Kan ik de keuzehulp opnieuw doen?',
+          answer: 'Ja, je kunt de keuzehulp zo vaak doen als je wilt.',
         },
       ],
     },
@@ -39,7 +39,7 @@ const FAQSection = () => {
         },
         {
           question: 'Kan ik mijn favoriete bestemmingen opslaan?',
-          answer: 'Ja, je kunt je favoriete bestemmingen opslaan door een account aan te maken en in te loggen.',
+          answer: 'Ja, je kunt je favoriete bestemmingen opslaan door een account aan te maken en in te loggen. Je kunt een favoriet toevoegen door op het hartpictogram te klikken, bij de bestemmingen waar je op klikt.',
         },
         {
           question: 'Hoe vaak worden nieuwe bestemmingen toegevoegd?',
@@ -47,7 +47,7 @@ const FAQSection = () => {
         },
         {
           question: 'Kan ik bestemmingen filteren op basis van mijn voorkeuren?',
-          answer: 'Ja, je kunt bestemmingen filteren op basis van verschillende criteria zoals budget, beste reisperiode en meer.',
+          answer: 'Ja, je kunt bestemmingen filteren op basis van verschillende criteria zoals budget, beste reisperiode en sorteren op alfabet.',
         },
       ],
     },

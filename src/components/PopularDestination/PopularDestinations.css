@@ -32,7 +32,7 @@
   
   .destination-image-wrapper img {
     width: 100%;
-    height: auto;
+    max-height: 500px;
     border-radius: 30px;
     box-shadow: 0 20px 8px rgba(0, 0, 0, 0.1);
   }

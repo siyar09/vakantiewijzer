@@ -51,7 +51,7 @@ const SignUp = () => {
       lastName,
       email,
       username,
-      password
+      password,
     };
 
     try {
@@ -70,6 +70,7 @@ const SignUp = () => {
       if (response.ok) {
         const data = JSON.parse(textResponse);
         setShowSuccessPopup(true);
+        
         setTimeout(() => {
           setShowSuccessPopup(false);
           navigate('/mijn-account');
