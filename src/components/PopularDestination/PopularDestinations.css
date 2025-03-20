@@ -34,7 +34,7 @@
     width: 100%;
     max-height: 500px;
     border-radius: 30px;
-    box-shadow: 0 20px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px rgb(176, 172, 172);
   }
   
   .destination-info {

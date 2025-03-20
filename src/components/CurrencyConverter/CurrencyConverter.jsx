@@ -55,7 +55,7 @@ const CurrencyConverter = ({ city, country }) => {
 
   return (
     <div className='currency-converter'>
-      <h2>Valutawisselaar</h2>
+      <h2>Valutacalculator</h2>
       <hr />
       {loading ? (
         <p>Wisselkoers laden...</p>
