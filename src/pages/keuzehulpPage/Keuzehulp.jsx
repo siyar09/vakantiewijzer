@@ -9,7 +9,7 @@ import Recommendation from '../../components/Recommendation/Recommendation.jsx';
 import questions from '../../data/Questions.js';
 import { fetchExchangeRate, calculatePriceDifference } from '../../components/BudgetCategory/BudgetCategory';
 
-const Quiz = () => {
+const Keuzehulp = () => {
   const [isQuizStarted, setIsQuizStarted] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -45,6 +45,7 @@ const Quiz = () => {
       const recommendationsPromises = countries.map(async country => {
         let score = 0;
 
+        // Calculate score based on answers
         if (answers[0] === 0 && country.temperature === 'Warm') score += 2;
         if (answers[0] === 1 && country.temperature === 'Gematigd') score += 2;
         if (answers[0] === 2 && country.temperature === 'Koel') score += 2;
@@ -62,17 +63,14 @@ const Quiz = () => {
         if (answers[5] === 0 && country.active === true) score += 2;
         if (answers[5] === 1 && country.active === false) score += 2;
 
-        // Calculate budget
         const cityExchangeRate = await fetchExchangeRate(country.currencyCode);
         const budget = calculatePriceDifference(cityExchangeRate, nlExchangeRate);
-
-        const currentWeather = "4°C, broken clouds";
         const description = descriptions[country.city] || "Geen beschrijving beschikbaar.";
 
         return {
           ...country,
           score,
-          currentWeather,
+          currentWeather: "4°C, broken clouds",
           bestTravelTime: country.bestTravelTime,
           budget: budget,
           description
@@ -91,10 +89,16 @@ const Quiz = () => {
   const handleFinishClick = async () => {
     setShowModal(true);
     setIsLoading(true);
+    
     try {
-      const topRecommendations = await getRecommendations();
-      setRecommendations(topRecommendations);
-      setCurrentQuestion(questions.length);
+      // Add minimum delay to show loading state
+      await Promise.all([
+        getRecommendations(),
+        new Promise(resolve => setTimeout(resolve, 3000))
+      ]).then(([recommendations]) => {
+        setRecommendations(recommendations);
+        setCurrentQuestion(questions.length);
+      });
     } catch (error) {
       console.error('Error getting recommendations:', error);
     } finally {
@@ -109,12 +113,15 @@ const Quiz = () => {
 
   return (
     <div className="quiz-container">
-      <Modal show={showModal} onClose={() => setShowModal(false)}>
-        <div className="loading-container">
-          <div className="loading-bar"></div>
-          <div className="loading-text">Antwoorden analyseren...</div>
-        </div>
-      </Modal>
+      {showModal && (
+        <Modal show={true} onClose={() => {}}>
+          <div className="loading-container">
+            <div className="loading-bar"></div>
+            <div className="loading-text">Antwoorden analyseren...</div>
+          </div>
+        </Modal>
+      )}
+      
       {!isQuizStarted && (
         <>
           <h1>Welkom bij de keuzehulp!</h1>
@@ -123,6 +130,7 @@ const Quiz = () => {
           </button>
         </>
       )}
+      
       {isQuizStarted && (
         currentQuestion < questions.length ? (
           <>
@@ -135,33 +143,38 @@ const Quiz = () => {
               onAnswerClick={handleAnswerClick}
             />
             <div className="navigation-buttons">
-              <button className="prev" onClick={handlePrevClick} disabled={currentQuestion === 0}>
+              <button 
+                className="prev" 
+                onClick={handlePrevClick} 
+                disabled={currentQuestion === 0}
+              >
                 ← Vorige
               </button>
               {currentQuestion < questions.length - 1 ? (
-                <button className="next" onClick={handleNextClick} disabled={selectedAnswer === null}>
+                <button 
+                  className="next" 
+                  onClick={handleNextClick} 
+                  disabled={selectedAnswer === null}
+                >
                   Volgende →
                 </button>
               ) : (
-                <button className="next" onClick={handleFinishClick} disabled={selectedAnswer === null}>
+                <button 
+                  className="next" 
+                  onClick={handleFinishClick} 
+                  disabled={selectedAnswer === null}
+                >
                   Voltooien
                 </button>
               )}
             </div>
           </>
         ) : (
-          isLoading ? (
-            <div className="loading-container">
-              <div className="loading-bar"></div>
-              <div className="loading-text">Antwoorden analyseren...</div>
-            </div>
-          ) : (
-            <Recommendation recommendations={recommendations} />
-          )
+          <Recommendation recommendations={recommendations} />
         )
       )}
     </div>
   );
 };
 
-export default Quiz;
+export default Keuzehulp;

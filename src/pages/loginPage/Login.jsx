@@ -40,16 +40,24 @@ const Login = () => {
       });
 
       const data = await response.json();
-      console.log('Server Response:', data); // Log de server response
+      console.log('Server Response:', data);
 
       if (response.ok) {
         if (data.jwt) {
+          // Store token and trigger storage event
           localStorage.setItem('token', data.jwt);
+          localStorage.setItem('username', username);
+          window.dispatchEvent(new Event('storage'));
+          
+          // Show success message
           setShowSuccessPopup(true);
+          
+          // Wait for animation and then navigate + refresh
           setTimeout(() => {
             setShowSuccessPopup(false);
             navigate('/');
-          }, 1000); // Hide popup and redirect after 5 seconds
+            window.location.reload(); // Refresh the page
+          }, 1000);
         } else {
           setErrorMessage('Inloggen mislukt: Geen token ontvangen');
           setShowErrorPopup(true);

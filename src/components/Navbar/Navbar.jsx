@@ -1,21 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { FaUserCircle, FaUserCheck } from 'react-icons/fa';
 import './Navbar.css';
 
 const Navbar = () => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const checkLoginStatus = () => {
+      const token = localStorage.getItem('token');
+      setIsLoggedIn(!!token);
+    };
+
+    checkLoginStatus();
+    window.addEventListener('storage', checkLoginStatus);
+    
+    return () => {
+      window.removeEventListener('storage', checkLoginStatus);
+    };
+  }, []);
+
+  // Add new useEffect for dropdown timeout
   useEffect(() => {
     let timeoutId;
     
     if (dropdownVisible) {
       timeoutId = setTimeout(() => {
         setDropdownVisible(false);
-      }, 3000); // 10 seconds in milliseconds
+      }, 3000); // 3 seconds
     }
 
-    // Cleanup function to clear timeout if component unmounts or dropdown is closed manually
+    // Cleanup timeout if component unmounts or dropdown is closed manually
     return () => {
       if (timeoutId) {
         clearTimeout(timeoutId);
@@ -25,9 +42,11 @@ const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
+    setIsLoggedIn(false);
+    setDropdownVisible(false); // Close dropdown after logout
     navigate('/mijn-account');
   };
-
+  
   return (
     <nav className="navbar">
       <h2>VakantieWijzer</h2>
@@ -42,12 +61,19 @@ const Navbar = () => {
             className="account-button"
             onClick={() => setDropdownVisible(!dropdownVisible)}
           >
-            Mijn Account
+            {isLoggedIn ? <FaUserCheck className="user-icon" /> : <FaUserCircle className="user-icon" />}
+            <span>Mijn Account</span>
           </button>
           {dropdownVisible && (
             <div className="dropdown-menu">
-              <NavLink to="/account">Accountoverzicht</NavLink>
-              <button onClick={handleLogout}>Uitloggen</button>
+              {isLoggedIn ? (
+                <>
+                  <NavLink to="/account">Accountoverzicht</NavLink>
+                  <button onClick={handleLogout}>Uitloggen</button>
+                </>
+              ) : (
+                <NavLink to="/mijn-account">Inloggen</NavLink>
+              )}
             </div>
           )}
         </li>

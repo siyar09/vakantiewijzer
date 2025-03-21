@@ -5,7 +5,7 @@ import './CityImage.css';
 const PIXABAY_API_KEY = import.meta.env.VITE_APP_PIXABAY_API_KEY;
 
 const CityImage = React.memo(({ city, className }) => {
-  const [imageUrl, setImageUrl] = useState('');
+  const [imageUrl, setImageUrl] = useState(null); // Change initial state to null
 
   useEffect(() => {
     const fetchCityImage = async () => {
@@ -19,14 +19,20 @@ const CityImage = React.memo(({ city, className }) => {
           }
         });
         
-        setImageUrl(response.data?.hits?.[1]?.webformatURL || '');
+        setImageUrl(response.data?.hits?.[1]?.webformatURL || null); // Use null as fallback
       } catch (error) {
         console.error(`Fout bij het ophalen van afbeelding voor ${city}:`, error);
+        setImageUrl(null);
       }
     };
 
     fetchCityImage();
   }, [city]);
+
+  // Only render the image if we have a URL
+  if (!imageUrl) {
+    return null; // Or return a placeholder/loading state
+  }
 
   return (
     <div>
