@@ -10,7 +10,7 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer-content">
         <div className="footer-left">
-          <p>contact: info@vakantiewijzer.nl</p>
+        <p>Contact: <a href="mailto:info@vakantiewijzer.nl">info@vakantiewijzer.nl</a></p>
         </div>
         <div className="footer-right">
           <p>Volg ons op:</p>
@@ -26,7 +26,10 @@ const Footer = () => {
         </div>
       </div>
       <div className="footer-center">
-        <p><Link to="/algemene-informatie">Algemene Informatie</Link></p>
+        <div className="footer-links">
+          <p><Link to="/algemene-informatie">Algemene Informatie</Link></p>
+          <p><Link to="/privacybeleid">Privacybeleid</Link></p>
+        </div>
         <p>© 2025 VakantieWijzer. Alle rechten voorbehouden.</p>
       </div>
     </footer>

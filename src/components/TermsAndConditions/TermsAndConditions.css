@@ -1,0 +1,76 @@
+.terms-checkbox {
+  margin: 20px 0;
+  text-align: left;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.terms-checkbox input[type="checkbox"] {
+  width: auto;
+  margin-top: 4px;
+}
+
+.terms-link {
+  color: #007bff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.terms-link:hover {
+  color: #0056b3;
+}
+
+.terms-content {
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.terms-content h2 {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+.terms-content h3 {
+  margin: 15px 0 10px;
+  color: #34495e;
+}
+
+.terms-content p {
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.terms-content ul {
+  margin: 10px 0;
+  padding-left: 20px;
+}
+
+.terms-content li {
+  margin: 5px 0;
+  line-height: 1.4;
+}
+
+.terms-text {
+  text-align: left;
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+  

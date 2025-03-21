@@ -16,6 +16,7 @@ import Login from './pages/loginPage/Login';
 import SignUp from './pages/signUpPage/SignUp';
 import Account from './pages/accountPage/Account';
 import AlgemeneInfo from './pages/algemeneInfoPage/AlgemenInfo';
+import Privacy from './pages/privacyPage/Privacy';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
         <Route path="/registreren" element={<SignUp />} />
         <Route path="/account" element={<ProtectedRoute element={Account} />} />
         <Route path="/algemene-informatie" element={<AlgemeneInfo />} />
+        <Route path="/privacybeleid" element={<Privacy />} />
       </Routes>
       <Footer />
     </Router>

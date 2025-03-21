@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Popup from '../../components/Popup/Popup';
 import FormGroup from '../../components/FormGroup/FormGroup';
+import TermsAndConditions from '../../components/TermsAndConditions/TermsAndConditions';
 import './SignUp.css';
 
 const SignUp = () => {
@@ -11,6 +12,7 @@ const SignUp = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [termsAccepted, setTermsAccepted] = useState(false);
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const [showErrorPopup, setShowErrorPopup] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -18,6 +20,15 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!termsAccepted) {
+      setErrorMessage('Je moet akkoord gaan met de algemene voorwaarden.');
+      setShowErrorPopup(true);
+      setTimeout(() => {
+        setShowErrorPopup(false);
+      }, 4000);
+      return;
+    }
 
     if (username.length < 4) {
       setErrorMessage('Gebruikersnaam moet minimaal 4 letters bevatten.');
@@ -52,6 +63,7 @@ const SignUp = () => {
       email,
       username,
       password,
+      termsAccepted
     };
 
     try {
@@ -152,6 +164,10 @@ const SignUp = () => {
             required
           />
         </FormGroup>
+        <TermsAndConditions 
+          accepted={termsAccepted}
+          onAcceptChange={setTermsAccepted}
+        />
         <button type="submit" className="signup-button">Registreren</button>
       </form>
     </div>

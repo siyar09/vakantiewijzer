@@ -4,7 +4,6 @@
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background-color: #fff;
 }
 
@@ -20,13 +19,13 @@
 }
 
 .general-info-container h2 {
-  font-size: 1.8em;
+  font-size: 1.6em;
   margin-top: 20px;
   margin-bottom: 10px;
 }
 
 .general-info-container hr {
-  border-top: 2px solid #000000;
+  border-bottom: 1px solid #dcdbdb;
 }
 
 .general-info-container p {
