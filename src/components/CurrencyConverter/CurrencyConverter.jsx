@@ -21,7 +21,7 @@ const CurrencyConverter = ({ city, country }) => {
         
         setCurrencyCode(countryData.currencyCode);
 
-        // Haal wisselkoers op van de Exchange Rates API
+        // Haal de wisselkoers op van de Exchange Rates API
         const response = await axios.get(`https://api.exchangerate-api.com/v4/latest/EUR`);
         
         if (response.data && response.data.rates[countryData.currencyCode]) {

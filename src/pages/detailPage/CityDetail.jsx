@@ -36,7 +36,7 @@ const CityDetail = () => {
           city={city.city} 
           country={city.country} 
           bestTravelTime={city.bestTravelTime} 
-          budget={city.budget} // Controleer of budget hier correct wordt doorgegeven
+          budget={city.budget} 
         />
         <CityFood city={city.city} nationality={cityData?.nationality} />
         <CityMap city={city.city} country={city.country} />

@@ -1,50 +1,98 @@
 .faq-section {
-    padding: 40px;
-    background-color: #f9f9f9;
-    color: var(--primary-color);
-  }
-  
-  .faq-section h2 {
-    text-align: center;
-    margin-bottom: 40px;
-    font-size: 2.2rem;
+  padding: 80px 20px;
+  background-color: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
 
+.faq-section h2 {
+  text-align: center;
+  margin-bottom: 50px;
+  font-size: 2.5rem;
+  color: #2c3e50;
+  font-weight: 700;
+}
+
+.faq-item {
+  background-color: white;
+  color: #2c3e50;
+  margin-bottom: 15px;
+  padding: 20px 30px;
+  width: 100%;
+  max-width: 800px;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.faq-item.active {
+  background-color: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.faq-category {
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.icon-wrapper {
+  color: #007bff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.faq-questions {
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.faq-question-answer {
+  margin-bottom: 25px;
+  padding-left: 20px;
+  border-left: 3px solid #007bff;
+}
+
+.faq-question {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #2c3e50;
+  font-size: 1.1rem;
+}
+
+.faq-answer {
+  color: #666;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .faq-section {
+    padding: 40px 15px;
   }
-  
+
+  .faq-section h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+
   .faq-item {
-    background-color: #40464e;
-    color: white;
-    margin-bottom: 10px;
-    padding: 15px;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    padding: 15px 20px;
   }
-  
-  .faq-item.active {
-    background-color: #24252b;
-  }
-  
+
   .faq-category {
-    font-size: 1.2rem;
-    display: flex;
-    align-items: center;
+    font-size: 1.1rem;
   }
-  
-  .faq-questions {
-    margin-top: 20px;
-  }
-  
-  .faq-question-answer {
-    margin-bottom: 25px;
-  }
-  
-  .faq-question {
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .faq-answer {
-    font-size: 1rem;
-    margin-left: 20px;
-  }
+}

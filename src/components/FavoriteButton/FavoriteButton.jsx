@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {jwtDecode} from 'jwt-decode';
+import { motion, AnimatePresence } from 'framer-motion';
 import './FavoriteButton.css';
 
 const FavoriteButton = ({ city }) => {
@@ -36,19 +37,33 @@ const FavoriteButton = ({ city }) => {
     setShowPopup(true);
     setTimeout(() => {
       setShowPopup(false);
-    }, 3000); // Verberg de popup na 3 seconden
+    }, 3000); // Verbergt de popup na 3 seconden
   };
 
   return (
     <>
-      <button className={`favorite-button ${isFavorite ? 'favorite' : ''}`} onClick={handleFavoriteClick}>
+      <motion.button 
+        className={`favorite-button ${isFavorite ? 'favorite' : ''}`} 
+        onClick={handleFavoriteClick}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        aria-label={isFavorite ? 'Verwijder uit favorieten' : 'Voeg toe aan favorieten'}
+      >
         {isFavorite ? '❤️' : '♡'}
-      </button>
-      {showPopup && (
-        <div className="favorite-popup">
-          {popupMessage}
-        </div>
-      )}
+      </motion.button>
+      <AnimatePresence mode="wait">
+        {showPopup && (
+          <motion.div 
+            className="favorite-popup"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.3 }}
+          >
+            {popupMessage}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

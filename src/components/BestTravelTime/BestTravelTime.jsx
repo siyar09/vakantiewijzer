@@ -11,7 +11,7 @@ const determineBestTravelTime = (temperature) => {
   if (!temperature) return 'Onbekend';
   
   // Bepaal beste reistijd op basis van temperatuur
-  if (temperature <= 0) { // Added condition for below zero
+  if (temperature <= 0) { 
     return TRAVEL_TIMES.SUMMER;
   } else if (temperature > 0 && temperature <= 10) {
     return TRAVEL_TIMES.SUMMER;

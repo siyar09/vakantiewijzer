@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { FaUserCircle, FaUserCheck } from 'react-icons/fa';
+import React, { useState, useEffect, useRef } from 'react';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaUserCircle, FaUserCheck, FaHome, FaGlobe, FaCompass, FaClipboardCheck, FaHeart } from 'react-icons/fa';
 import './Navbar.css';
 
 const Navbar = () => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const dropdownRef = useRef(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const checkLoginStatus = () => {
@@ -22,63 +25,111 @@ const Navbar = () => {
     };
   }, []);
 
-  // Add new useEffect for dropdown timeout
   useEffect(() => {
-    let timeoutId;
-    
-    if (dropdownVisible) {
-      timeoutId = setTimeout(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setDropdownVisible(false);
-      }, 3000); // 3 seconds
-    }
-
-    // Cleanup timeout if component unmounts or dropdown is closed manually
-    return () => {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
       }
     };
-  }, [dropdownVisible]);
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Close dropdown when route changes
+  useEffect(() => {
+    setDropdownVisible(false);
+  }, [location.pathname]);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
     setIsLoggedIn(false);
-    setDropdownVisible(false); // Close dropdown after logout
+    setDropdownVisible(false);
     navigate('/mijn-account');
   };
+
+  const navItems = [
+    { path: '/', label: 'Home', icon: <FaHome /> },
+    { path: '/bestemmingen', label: 'Bestemmingen', icon: <FaGlobe /> },
+    { path: '/keuzehulp', label: 'Keuzehulp', icon: <FaCompass /> },
+    { path: '/reis-check', label: 'Reis Check', icon: <FaClipboardCheck /> },
+    { path: '/mijn-favorieten', label: 'Mijn Favorieten', icon: <FaHeart /> },
+  ];
   
   return (
-    <nav className="navbar">
-      <h2>VakantieWijzer</h2>
+    <motion.nav 
+      className="navbar"
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ type: "spring", stiffness: 100 }}
+    >
+      <motion.h2
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={() => navigate('/')}
+      >
+        VakantieWijzer
+      </motion.h2>
+
       <ul>
-        <li><NavLink to="/">Home</NavLink></li>
-        <li><NavLink to="/bestemmingen">Bestemmingen</NavLink></li>
-        <li><NavLink to="/keuzehulp">Keuzehulp</NavLink></li>
-        <li><NavLink to="/reis-check">Reis Check</NavLink></li>
-        <li><NavLink to="/mijn-favorieten">Mijn Favorieten</NavLink></li>
-        <li className="account-dropdown">
-          <button
+        {navItems.map((item) => (
+          <motion.li 
+            key={item.path}
+            whileHover={{ y: -2 }}
+          >
+            <NavLink to={item.path}>
+              {item.icon}
+              <span>{item.label}</span>
+            </NavLink>
+          </motion.li>
+        ))}
+        
+        <motion.li 
+          className="account-dropdown"
+          ref={dropdownRef}
+        >
+          <motion.button
             className="account-button"
             onClick={() => setDropdownVisible(!dropdownVisible)}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             {isLoggedIn ? <FaUserCheck className="user-icon" /> : <FaUserCircle className="user-icon" />}
             <span>Mijn Account</span>
-          </button>
-          {dropdownVisible && (
-            <div className="dropdown-menu">
-              {isLoggedIn ? (
-                <>
-                  <NavLink to="/account">Accountoverzicht</NavLink>
-                  <button onClick={handleLogout}>Uitloggen</button>
-                </>
-              ) : (
-                <NavLink to="/mijn-account">Inloggen</NavLink>
-              )}
-            </div>
-          )}
-        </li>
+          </motion.button>
+
+          <AnimatePresence>
+            {dropdownVisible && (
+              <motion.div 
+                className="dropdown-menu"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+              >
+                {isLoggedIn ? (
+                  <>
+                    <motion.div whileHover={{ x: 5 }}>
+                      <NavLink to="/account">Accountoverzicht</NavLink>
+                    </motion.div>
+                    <motion.button 
+                      onClick={handleLogout}
+                      whileHover={{ x: 5 }}
+                    >
+                      Uitloggen
+                    </motion.button>
+                  </>
+                ) : (
+                  <motion.div whileHover={{ x: 5 }}>
+                    <NavLink to="/mijn-account">Inloggen</NavLink>
+                  </motion.div>
+                )}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.li>
       </ul>
-    </nav>
+    </motion.nav>
   );
 };
 

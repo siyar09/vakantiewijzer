@@ -1,53 +1,95 @@
 .statistics {
-    display: flex;
-    justify-content: space-around;
-    background-color: #ffffff;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 30px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.stat-item:hover {
+  transform: translateY(-5px);
+}
+
+.stat-icon {
+  font-size: 2.5rem;
+  color: #2d6a4f;
+  margin-bottom: 20px;
+}
+
+.stat-item h2 {
+  font-size: 2.8rem;
+  margin: 0;
+  background: linear-gradient(135deg, #2d6a4f 0%, #1a472a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
+
+.stat-item p {
+  margin: 15px 0 0;
+  font-size: 1.1rem;
+  color: #4a5568;
+  line-height: 1.6;
+}
+
+.count {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .statistics {
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    grid-template-columns: 1fr;
   }
-  
+
   .stat-item {
-    text-align: center;
-    flex: 1;
-    margin: 0 10px;
+    padding: 20px;
   }
-  
+
   .stat-item h2 {
-    font-size: 3em;
-    margin: 0;
-    color: #ff6347;
-    animation: fadeIn 1s ease-in-out;
+    font-size: 2.2rem;
   }
-  
+
   .stat-item p {
-    margin: 10px 0 0;
-    font-size: 1.2em;
-    color: #333;
+    font-size: 1rem;
   }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+
+  .stat-icon {
+    font-size: 2rem;
   }
-  
-  .count {
-    animation: countUp 2s ease-in-out;
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .statistics {
+    grid-template-columns: repeat(2, 1fr);
   }
-  
-  @keyframes countUp {
-    from {
-      opacity: 0;
-      transform: scale(0.5);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
   }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

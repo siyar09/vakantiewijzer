@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaChevronDown } from 'react-icons/fa';
 import './FAQSection.css';
 
 const FAQSection = () => {
@@ -94,33 +96,63 @@ const FAQSection = () => {
       ],
     },
   ];
-
-  return (
-    <section className="faq-section">
-      <h2>FAQ - Veelgestelde Vragen</h2>
-      {faqs.map((faq, index) => (
-        <div
-          key={index}
-          className={`faq-item ${activeIndex === index ? 'active' : ''}`}
-          onClick={() => toggleFAQ(index)}
+  
+    return (
+      <section className="faq-section">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
         >
-          <div className="faq-category">
-            {activeIndex === index ? '-' : '+'} {faq.category}
-          </div>
-          {activeIndex === index && (
-            <div className="faq-questions">
-              {faq.questions.map((q, i) => (
-                <div key={i} className="faq-question-answer">
-                  <div className="faq-question">{q.question}</div>
-                  <div className="faq-answer">{q.answer}</div>
-                </div>
-              ))}
+          Veelgestelde Vragen
+        </motion.h2>
+        {faqs.map((faq, index) => (
+          <motion.div
+            key={index}
+            className={`faq-item ${activeIndex === index ? 'active' : ''}`}
+            onClick={() => toggleFAQ(index)}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+          >
+            <div className="faq-category">
+              <span>{faq.category}</span>
+              <motion.div
+                className="icon-wrapper"
+                animate={{ rotate: activeIndex === index ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <FaChevronDown />
+              </motion.div>
             </div>
-          )}
-        </div>
-      ))}
-    </section>
-  );
-};
-
-export default FAQSection;
+            <AnimatePresence>
+              {activeIndex === index && (
+                <motion.div
+                  className="faq-questions"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {faq.questions.map((q, i) => (
+                    <motion.div
+                      key={i}
+                      className="faq-question-answer"
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.1 }}
+                    >
+                      <div className="faq-question">{q.question}</div>
+                      <div className="faq-answer">{q.answer}</div>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        ))}
+      </section>
+    );
+  };
+  
+  export default FAQSection;

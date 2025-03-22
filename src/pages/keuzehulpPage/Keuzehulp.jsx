@@ -8,6 +8,8 @@ import ProgressBar from '../../components/ProgressBar/ProgressBar.jsx';
 import Recommendation from '../../components/Recommendation/Recommendation.jsx';
 import questions from '../../data/Questions.js';
 import { fetchExchangeRate, calculatePriceDifference } from '../../components/BudgetCategory/BudgetCategory';
+import { motion, AnimatePresence } from 'framer-motion';
+
 
 const Keuzehulp = () => {
   const [isQuizStarted, setIsQuizStarted] = useState(false);
@@ -45,7 +47,7 @@ const Keuzehulp = () => {
       const recommendationsPromises = countries.map(async country => {
         let score = 0;
 
-        // Calculate score based on answers
+        // Bereken score op basis van antwoorden
         if (answers[0] === 0 && country.temperature === 'Warm') score += 2;
         if (answers[0] === 1 && country.temperature === 'Gematigd') score += 2;
         if (answers[0] === 2 && country.temperature === 'Koel') score += 2;
@@ -91,7 +93,7 @@ const Keuzehulp = () => {
     setIsLoading(true);
     
     try {
-      // Add minimum delay to show loading state
+      // Voeg een minimale vertraging toe om de laadstatus te tonen
       await Promise.all([
         getRecommendations(),
         new Promise(resolve => setTimeout(resolve, 3000))
@@ -111,70 +113,109 @@ const Keuzehulp = () => {
     setIsQuizStarted(true);
   };
 
-  return (
-    <div className="quiz-container">
-      {showModal && (
-        <Modal show={true} onClose={() => {}}>
-          <div className="loading-container">
-            <div className="loading-bar"></div>
-            <div className="loading-text">Antwoorden analyseren...</div>
-          </div>
-        </Modal>
-      )}
-      
-      {!isQuizStarted && (
-        <>
-          <h1>Welkom bij de keuzehulp!</h1>
-          <button className="start-button" onClick={handleStartClick}>
-            Dit is het begin van jou vakantie!
-          </button>
-        </>
-      )}
-      
-      {isQuizStarted && (
-        currentQuestion < questions.length ? (
-          <>
-            <span className="question-number">{currentQuestion + 1}/{questions.length}</span>
-            <ProgressBar currentQuestion={currentQuestion} totalQuestions={questions.length} />
-            <Question
-              question={questions[currentQuestion].question}
-              answers={questions[currentQuestion].answers}
-              selectedAnswer={selectedAnswer}
-              onAnswerClick={handleAnswerClick}
-            />
-            <div className="navigation-buttons">
-              <button 
-                className="prev" 
-                onClick={handlePrevClick} 
-                disabled={currentQuestion === 0}
+    return (
+      <div className="quiz-wrapper">
+        <motion.div 
+          className="quiz-container"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          {showModal && (
+            <Modal show={true} onClose={() => {}}>
+              <motion.div 
+                className="loading-container"
+                initial={{ scale: 0.8 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 0.3 }}
               >
-                ← Vorige
-              </button>
-              {currentQuestion < questions.length - 1 ? (
-                <button 
-                  className="next" 
-                  onClick={handleNextClick} 
-                  disabled={selectedAnswer === null}
+                <div className="loading-bar"></div>
+                <div className="loading-text">Je perfecte bestemming zoeken...</div>
+              </motion.div>
+            </Modal>
+          )}
+          
+          {!isQuizStarted ? (
+            <motion.div 
+              className="welcome-section"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+            >
+              <h1>Ontdek Jouw Perfecte Bestemming</h1>
+              <p className="welcome-text">
+                Beantwoord enkele vragen en wij vinden de beste bestemming voor jouw droomvakantie
+              </p>
+              <motion.button 
+                className="start-button"
+                onClick={handleStartClick}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Start De Reis
+              </motion.button>
+            </motion.div>
+          ) : (
+            currentQuestion < questions.length ? (
+              <motion.div 
+                className="question-section"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <span className="question-number">Vraag {currentQuestion + 1} van {questions.length}</span>
+                <ProgressBar currentQuestion={currentQuestion} totalQuestions={questions.length} />
+                <Question
+                  question={questions[currentQuestion].question}
+                  answers={questions[currentQuestion].answers}
+                  selectedAnswer={selectedAnswer}
+                  onAnswerClick={handleAnswerClick}
+                />
+                <motion.div 
+                  className="navigation-buttons"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.3 }}
                 >
-                  Volgende →
-                </button>
-              ) : (
-                <button 
-                  className="next" 
-                  onClick={handleFinishClick} 
-                  disabled={selectedAnswer === null}
-                >
-                  Voltooien
-                </button>
-              )}
-            </div>
-          </>
-        ) : (
-          <Recommendation recommendations={recommendations} />
-        )
-      )}
-    </div>
-  );
-};
-
-export default Keuzehulp;
+                  <motion.button 
+                    className="prev-button"
+                    onClick={handlePrevClick}
+                    disabled={currentQuestion === 0}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    ← Vorige
+                  </motion.button>
+                  {currentQuestion < questions.length - 1 ? (
+                    <motion.button 
+                      className="next-button"
+                      onClick={handleNextClick}
+                      disabled={selectedAnswer === null}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Volgende →
+                    </motion.button>
+                  ) : (
+                    <motion.button 
+                      className="finish-button"
+                      onClick={handleFinishClick}
+                      disabled={selectedAnswer === null}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Ontdek Mijn Bestemming
+                    </motion.button>
+                  )}
+                </motion.div>
+              </motion.div>
+            ) : (
+              <Recommendation recommendations={recommendations} />
+            )
+          )}
+        </motion.div>
+      </div>
+    );
+  };
+  
+  export default Keuzehulp;

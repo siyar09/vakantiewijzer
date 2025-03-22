@@ -23,7 +23,7 @@ const useCityData = () => {
 
         for (let { city, country, countryCode, currencyCode } of countries) {
           try {
-            // Fetch weather data
+            // Fetch weer data
             const weatherResponse = await fetch(
               `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${WEATHER_API_KEY}&units=metric`
             );
@@ -33,7 +33,7 @@ const useCityData = () => {
             const cityExchangeRate = await fetchExchangeRate(currencyCode);
             if (cityExchangeRate === null) continue;
 
-            // Calculate temperature and determine best travel time
+            // Bereken de temperatuur en bepaal de beste reistijd
             const temperature = weatherData?.main?.temp ? Math.round(weatherData.main.temp) : null;
             const bestTravelTime = determineBestTravelTime(temperature);
             const budgetCategory = calculatePriceDifference(cityExchangeRate, nlExchangeRate);

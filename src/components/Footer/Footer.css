@@ -1,90 +1,116 @@
 .footer {
-    background-color: rgb(64, 121, 73);
+    background: linear-gradient(135deg, #2d6a4f 0%, #1a472a 100%);
     color: white;
-    padding: 1px 0;
-    text-align: center;
-    position: relative; /* Changed from fixed to relative */
+    padding: 40px 20px 20px;
     width: 100%;
     box-sizing: border-box;
-    margin-top: auto; /* Push footer to bottom */
-}
-
-/* Remove the body margin since we don't need it anymore */
-body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-/* Rest of your footer styles remain the same */
-.footer * {
-    color: white;
-}
-
-.footer-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 0 20px;
-    box-sizing: border-box;
-}
-
-.footer-left,
-.footer-right {
-    display: flex;
-    align-items: center;
-    margin-top: 30px;
-}
-
-.footer-left {
-    justify-content: flex-start; /* Plaatst 'contact' helemaal links */
-    text-align: left;
-}
-
-.footer-right {
-    justify-content: flex-end; /* Plaatst 'volg ons' helemaal rechts */
-    text-align: right;
-}
-
-.footer-center {
-    text-align: center;
-    margin-top: 10px; /* Zorgt voor wat ruimte boven het copyright */
-    margin-bottom: 0;
-    width: 100%;
-}
-
-.footer-right p {
-    margin: 0; /* Verwijder standaard marge */
-    margin-right: 10px; /* Voeg marge toe aan de rechterkant voor ruimte tussen tekst en iconen */
-}
-
-.footer-right a {
-    margin-left: 10px;
-    display: inline-block; /* Zorgt ervoor dat de marges correct worden toegepast */
-}
-
-.footer-right img {
-    width: 46px;
-    height: 46px;
-    transition: transform 0.3s; /* Voeg een transitie toe voor een hover-effect */
-}
-
-.footer-right img:hover {
-    transform: scale(1.1); /* Vergroot de afbeelding iets bij hover */
-}
-
-.footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 10px;
+    margin-top: auto;
   }
   
-  .footer-links p {
-    margin: 0;
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    padding-bottom: 30px;
+  }
+  
+  .footer-section {
+    text-align: center;
+  }
+  
+  .footer-section h3 {
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .contact-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+  }
+  
+  .contact-link:hover {
+    color: #a8e6cf;
+  }
+  
+  .contact-icon {
+    font-size: 1.2rem;
+  }
+  
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .footer-links a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
   }
   
   .footer-links a:hover {
-    text-decoration: underline;
+    color: #a8e6cf;
+  }
+  
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .social-icon {
+    font-size: 1.8rem;
+    color: white;
+    transition: color 0.3s ease;
+  }
+  
+  .social-icon.instagram:hover {
+    color: #e1306c;
+  }
+  
+  .social-icon.facebook:hover {
+    color: #1877f2;
+  }
+  
+  .social-icon.linkedin:hover {
+    color: #0077b5;
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .footer-bottom p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  
+  @media (max-width: 768px) {
+    .footer-content {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+  
+    .footer-section {
+      padding: 0 20px;
+    }
+  
+    .social-links {
+      margin-top: 10px;
+    }
   }

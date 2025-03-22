@@ -1,66 +1,100 @@
 .city-card {
   display: flex;
-  align-items: flex-start; /* Zorg ervoor dat de items bovenaan worden uitgelijnd */
+  align-items: flex-start;
   background-color: #fff;
-  color: #000000;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  padding: 15px;
-  transition: transform 0.2s;
+  padding: 20px;
+  transition: all 0.3s ease;
   width: 100%;
-  max-width: 1300px;
-  margin: 5px auto;
+  margin: 5px 0; 
+  gap: 25px;
+}
+
+.city-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .city-image {
-  flex: 0 0 200px;
-  height: 200px;
+  flex: 0 0 300px;
+  height: 300px;
   object-fit: cover;
-  margin-right: 20px;
+  border-radius: 10px;
 }
 
 .city-info {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Zorg ervoor dat de H2 bovenaan staat */
   flex: 1;
-  position: relative; /* Voeg deze regel toe */
+  min-height: 300px;
+  position: relative;
 }
 
 .city-info h2 {
-  align-self: flex-start; /* Plaats de H2-tekst bovenaan */
-  font-size: 1.5em;
-  margin-bottom: 10px;
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .city-description {
-  margin-bottom: 20px;
-  text-align: left;
-}
-
-.city-info p {
-  margin: 4px 0;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #4a5568;
+  margin-bottom: 25px;
 }
 
 .more-info-button {
-  background-color: #2d6a4f;
-  color: #fff;
+  background: linear-gradient(135deg, #2d6a4f 0%, #1a472a 100%);
+  color: white;
   border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
+  border-radius: 30px;
+  padding: 12px 25px;
   cursor: pointer;
-  transition: background-color 0.3s;
-  position: absolute; /* Voeg deze regel toe */
-  margin-top: 250px;
-  right: 15px; /* Voeg deze regel toe */
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 .more-info-button:hover {
-  background-color: #35584a;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(45, 106, 79, 0.3);
 }
 
-.star-rating {
-  color: #ffcc00;
-  font-size: 1.2em;
+@media (max-width: 768px) {
+  .city-card {
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  .city-image {
+    flex: 0 0 200px;
+    height: 200px;
+    width: 100%;
+  }
+
+  .city-info {
+    min-height: auto;
+    padding-bottom: 60px;
+  }
+
+  .city-info h2 {
+    font-size: 1.5rem;
+  }
+
+  .city-description {
+    font-size: 1rem;
+  }
+
+  .more-info-button {
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+  }
 }

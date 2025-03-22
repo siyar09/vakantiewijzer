@@ -1,21 +1,25 @@
 import React from 'react';
 import ChecklistItem from '../ChecklistItem/ChecklistItem';
 
-const ChecklistSection = ({ title, items, checklist, section, handleCheckboxChange }) => {
+const ChecklistSection = ({ title, icon, items, checklist = [], section, handleCheckboxChange }) => {
+  const checklistArray = Array.isArray(checklist) ? checklist : new Array(items.length).fill(false);
+
   return (
     <div className="checklist-section">
-      <h2>{title}</h2>
-      <hr />
-      <ul>
+      <h2>
+        <span className="checklist-icon">{icon}</span>
+        {title}
+      </h2>
+      <div className="checklist-items">
         {items.map((item, index) => (
           <ChecklistItem
-            key={index}
+            key={`${section}-${index}`}
             item={item}
-            checked={checklist[section][index] || false}
+            checked={checklistArray[index] || false}
             onChange={() => handleCheckboxChange(section, index)}
           />
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
