@@ -10,7 +10,6 @@ VakantieWijzer is een interactieve webapplicatie die je helpt bij het vinden van
 - **Reis Checklist**: Handige paklijsten voor verschillende type reizen
 - **Real-time Weer Info**: Actuele weersinformatie van bestemmingen
 - **Restaurant Tips**: Lokale eetgelegenheden via Yelp
-- **Afbeeldingen**: Hoogwaardige foto's via Pixabay
 - **Lokale Gerechten**: Recepten en food informatie via Spoonacular
 
 ## Vereisten 📋
