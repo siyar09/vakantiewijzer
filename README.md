@@ -9,8 +9,8 @@ VakantieWijzer is een interactieve webapplicatie die je helpt bij het vinden van
 - **Persoonlijk Account**: Sla je favoriete bestemmingen op
 - **Reis Checklist**: Handige paklijsten voor verschillende type reizen
 - **Real-time Weer Info**: Actuele weersinformatie van bestemmingen
-- **Restaurant Tips**: Lokale eetgelegenheden via Yelp
 - **Lokale Gerechten**: Recepten en food informatie via Spoonacular
+- **Top Activiteiten**: Aanbevolen activiteiten voor elke bestemming
 
 ## Vereisten 📋
 
@@ -39,6 +39,8 @@ VITE_APP_WEATHER_API_KEY=jouw_openweather_api_key
 VITE_APP_YELP_API_KEY=jouw_yelp_api_key
 VITE_APP_PIXABAY_API_KEY=jouw_pixabay_api_key
 VITE_APP_SPOONACULAR_API_KEY=jouw_spoonacular_api_key
+VITE_APP_OPENTRIP_API_KEY=jouw_opentrip_api_key
+
 ```
 
 4. Start de development server:
@@ -71,6 +73,11 @@ Voor het gebruik van de applicatie heb je de volgende API keys nodig:
    - Registreer voor een account
    - Kies een plan (er is een gratis optie beschikbaar)
    - Genereer je API key
+
+5. **OpenTripMap API**
+   - Ga naar [OpenTrip](https://dev.opentripmap.org/docs)
+   - Registreer voor een account
+   - Ga naar je account settings om je API key te bekijken
 
 ## Scripts 📝
 

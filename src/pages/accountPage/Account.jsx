@@ -28,7 +28,7 @@ const Account = () => {
       try {
         const decodedToken = jwtDecode(token);
         const username = decodedToken.sub;
-        console.log('Decoded username:', username);
+        // console.log('Decoded username:', username);
 
         if (!username) {
           console.error('Geen geldige gebruikersnaam gevonden in token.');
@@ -45,7 +45,7 @@ const Account = () => {
         });
 
         const text = await response.text();
-        console.log('API raw response:', response.status, text);
+        // console.log('API raw response:', response.status, text);
 
         if (response.ok) {
           const data = JSON.parse(text);
@@ -85,7 +85,7 @@ const Account = () => {
       });
 
       const text = await response.text();
-      console.log('API raw response:', response.status, text);
+      // console.log('API raw response:', response.status, text);
 
       if (response.ok) {
         const data = text ? JSON.parse(text) : {};

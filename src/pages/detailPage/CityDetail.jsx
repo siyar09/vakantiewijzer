@@ -8,6 +8,7 @@ import CityMap from '../../components/CityMap/CityMap';
 import TravelAdvice from '../../components/TravelAdvice/TravelAdvice';
 import CityReviewsFromPeople from '../../components/CityReviewsFromPeople/CityReviewsFromPeople';
 import CityImage from '../../components/CityImage/CityImage';
+import CityActivities from '../../components/CityActivities/CityActivities';
 import countries from '../../data/Countries';
 import FavoriteButton from '../../components/FavoriteButton/FavoriteButton';
 import './CityDetail.css';
@@ -39,6 +40,7 @@ const CityDetail = () => {
           budget={city.budget} 
         />
         <CityFood city={city.city} nationality={cityData?.nationality} />
+        <CityActivities city={city.city} country={city.country} />
         <CityMap city={city.city} country={city.country} />
         <CurrencyConverter city={city.city} />
         <TravelAdvice cityData={cityData} city={city.city} />

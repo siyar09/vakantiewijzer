@@ -12,7 +12,7 @@ const FAQSection = () => {
 
   const faqs = [
     {
-      category: 'Over de Quiz',
+      category: 'Over de Keuzehulp',
       questions: [
         {
           question: 'Hoe werkt de keuzehulp?',
@@ -33,7 +33,7 @@ const FAQSection = () => {
       ],
     },
     {
-      category: 'Over de bestemmingen',
+      category: 'Over de Bestemmingen',
       questions: [
         {
           question: 'Welke bestemmingen zijn beschikbaar?',

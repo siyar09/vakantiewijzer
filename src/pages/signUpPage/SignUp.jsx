@@ -67,9 +67,6 @@ const SignUp = () => {
         body: JSON.stringify(user)
       });
 
-      const textResponse = await response.text();
-      console.log('Server Response:', textResponse);
-
       if (response.ok) {
         setShowSuccessPopup(true);
         // Gebruik een kortere timeout voor een success messages

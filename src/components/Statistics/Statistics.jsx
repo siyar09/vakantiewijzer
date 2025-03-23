@@ -14,14 +14,14 @@ const Statistics = () => {
     {
       icon: <FaUsers />,
       value: 10000,
-      label: "meer dan 10.000 bezoekers per maand",
+      label: "Meer dan 10.000 bezoekers per maand",
       suffix: "",
       key: "visitors"
     },
     {
       icon: <FaGlobeEurope />,
       value: 30,
-      label: "meer dan 30+ landen beschikbaar",
+      label: "Meer dan 30+ landen beschikbaar",
       suffix: "+",
       key: "countries"
     },

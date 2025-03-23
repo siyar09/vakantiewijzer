@@ -61,7 +61,6 @@
 }
 
 .city-detail-info {
-    padding: 20px;
     border-radius: 15px;
     width: 100%;
     color: black;
@@ -80,10 +79,7 @@
 
 .city-food {
     padding: 15px;
-    background: #ffffff;
-    border-radius: 15px;
-    margin: 20px 0;
-  }
+}
   
 .city-food ul {
     display: grid;
@@ -192,11 +188,15 @@
     background: #f8f9fa;
     border-radius: 12px;
     padding: 20px;
+    margin-top: 30px;
     margin-bottom: 20px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     transition: transform 0.3s ease;
 }
-  
+.reviews h2 {
+    margin-top: 40px;
+}
+
 .review:hover {
     transform: translateY(-2px);
 }
