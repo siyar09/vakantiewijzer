@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode';
 import { motion } from 'framer-motion';
 import { FaUser, FaEnvelope, FaLock, FaEdit, FaSave } from 'react-icons/fa';
+import { useAuth } from '../../context/AuthContext';
 import Popup from '../../components/Popup/Popup';
 import './Account.css';
 
@@ -16,45 +16,31 @@ const Account = () => {
   const [showErrorPopup, setShowErrorPopup] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
+  const { user, checkAuthStatus } = useAuth();
 
   useEffect(() => {
     const fetchUserData = async () => {
       const token = localStorage.getItem('token');
-      if (!token) {
+      if (!token || !user) {
         navigate('/mijn-account');
         return;
       }
 
       try {
-        const decodedToken = jwtDecode(token);
-        const username = decodedToken.sub;
-        // console.log('Decoded username:', username);
-
-        if (!username) {
-          console.error('Geen geldige gebruikersnaam gevonden in token.');
-          navigate('/mijn-account');
-          return;
-        }
-
-        const response = await fetch(`https://api.datavortex.nl/vakantiewijzer/users/${username}`, {
-          method: 'GET',
+        const response = await fetch(`https://api.datavortex.nl/vakantiewijzer/users/${user.sub}`, {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
           }
         });
 
-        const text = await response.text();
-        // console.log('API raw response:', response.status, text);
-
         if (response.ok) {
-          const data = JSON.parse(text);
+          const data = await response.json();
           setUserData(data);
           setEmail(data.email);
-          setUsername(data.username);
+          setUsername(data.username); 
         } else {
-          console.error('API error:', text);
-          navigate('/mijn-account');
+          throw new Error('Failed to fetch user data');
         }
       } catch (error) {
         console.error('Error fetching user data:', error);
@@ -63,61 +49,43 @@ const Account = () => {
     };
 
     fetchUserData();
-  }, [navigate]);
+  }, [user, navigate]);
 
   const handleSaveChanges = async () => {
     const token = localStorage.getItem('token');
-    if (!token) {
+    if (!token || !user) {
       navigate('/mijn-account');
       return;
     }
 
-    const body = { password };
-
     try {
-      const response = await fetch(`https://api.datavortex.nl/vakantiewijzer/users/${userData.username}`, {
+      const response = await fetch(`https://api.datavortex.nl/vakantiewijzer/users/${user.sub}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify(body)
+        body: JSON.stringify({ password })
       });
 
-      const text = await response.text();
-      // console.log('API raw response:', response.status, text);
-
       if (response.ok) {
-        const data = text ? JSON.parse(text) : {};
-        setUserData(data);
         setShowSuccessPopup(true);
-        setTimeout(() => {
-          setShowSuccessPopup(false);
-        }, 1000);
+        setTimeout(() => setShowSuccessPopup(false), 1000);
         setIsEditingPassword(false);
+        checkAuthStatus();
       } else {
-        setErrorMessage('Er is een fout opgetreden bij het opslaan van de wijzigingen. Probeer het later opnieuw.');
-        setShowErrorPopup(true);
-        setTimeout(() => {
-          setShowErrorPopup(false);
-        }, 4000);
+        throw new Error('Failed to update user data');
       }
     } catch (error) {
-      console.error('Error saving changes:', error);
-      setErrorMessage('Er is een fout opgetreden bij het opslaan van de wijzigingen. Probeer het later opnieuw.');
+      setErrorMessage('Er is een fout opgetreden bij het opslaan van de wijzigingen');
       setShowErrorPopup(true);
-      setTimeout(() => {
-        setShowErrorPopup(false);
-      }, 4000);
+      setTimeout(() => setShowErrorPopup(false), 4000);
     }
   };
 
   if (!userData) {
     return <p>Loading...</p>;
   }
-
-  
-    // ...existing state declarations...
   
     return (
       <motion.div 

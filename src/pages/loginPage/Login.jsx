@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaUser, FaLock } from 'react-icons/fa';
+import { useAuth } from '../../context/AuthContext';
 import Popup from '../../components/Popup/Popup';
 import FormGroup from '../../components/FormGroup/FormGroup';
 import './Login.css';
-
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -14,6 +14,7 @@ const Login = () => {
   const [showErrorPopup, setShowErrorPopup] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,16 +22,9 @@ const Login = () => {
     if (!username || !password) {
       setErrorMessage('Vul zowel een gebruikersnaam als een wachtwoord in.');
       setShowErrorPopup(true);
-      setTimeout(() => {
-        setShowErrorPopup(false);
-      }, 5000);
+      setTimeout(() => setShowErrorPopup(false), 5000);
       return;
     }
-
-    const user = {
-      username,
-      password
-    };
 
     try {
       const response = await fetch('https://api.datavortex.nl/vakantiewijzer/users/authenticate', {
@@ -39,54 +33,31 @@ const Login = () => {
           'Content-Type': 'application/json',
           'X-Api-Key': 'vakantiewijzer:7FZmMmmYlzUoPdSkAtzG'
         },
-        body: JSON.stringify(user)
+        body: JSON.stringify({ username, password })
       });
 
       const data = await response.json();
-      console.log('Server Response:', data);
 
-      if (response.ok) {
-        if (data.jwt) {
-          // Store token and trigger storage event
-          localStorage.setItem('token', data.jwt);
-          localStorage.setItem('username', username);
-          window.dispatchEvent(new Event('storage'));
-          
-          // Show success message
-          setShowSuccessPopup(true);
-          
-          // Wait for animation and then navigate + refresh
-          setTimeout(() => {
-            setShowSuccessPopup(false);
-            navigate('/');
-            window.location.reload(); // Refresh the page
-          }, 1000);
-        } else {
-          setErrorMessage('Inloggen mislukt: Geen token ontvangen');
-          setShowErrorPopup(true);
-          setTimeout(() => {
-            setShowErrorPopup(false);
-          }, 4000);
-        }
-      } else {
-        setErrorMessage(`Inloggen mislukt: ${data.message || 'Onbekende fout'}`);
-        setShowErrorPopup(true);
+      if (response.ok && data.jwt) {
+        login(data.jwt);
+        setShowSuccessPopup(true);
         setTimeout(() => {
-          setShowErrorPopup(false);
-        }, 5000);
+          setShowSuccessPopup(false);
+          navigate('/');
+        }, 1000);
+      } else {
+        setErrorMessage(data.message || 'Inloggen mislukt');
+        setShowErrorPopup(true);
+        setTimeout(() => setShowErrorPopup(false), 5000);
       }
     } catch (error) {
       console.error('Error:', error);
-      setErrorMessage('Er is een fout opgetreden. Probeer het opnieuw.');
+      setErrorMessage('Er is een fout opgetreden');
       setShowErrorPopup(true);
-      setTimeout(() => {
-        setShowErrorPopup(false);
-      }, 5000);
+      setTimeout(() => setShowErrorPopup(false), 5000);
     }
   };
 
-
-  
     return (
       <motion.div 
         className="login-wrapper"
