@@ -1,98 +1,118 @@
+.popular-destinations-section {
+  background-color: #f8f9fa;
+  padding: 80px 0;
+}
+
 .popular-destinations-container {
-    background-color: #F3F6F9;
-    padding: 60px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.popular-destinations-container h1 {
+  text-align: center;
+  font-size: 2.8rem;
+  color: #2c3e50;
+  margin-bottom: 60px;
+  font-weight: 700;
+}
+
+.destinations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  padding: 20px 0;
+}
+
+.destination-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.destination-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+}
+
+.destination-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.destination-overlay {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 2;
+}
+
+.budget-tag {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.destination-content {
+  padding: 25px;
+}
+
+.destination-content h3 {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.destination-highlight {
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  font-style: italic;
+}
+
+.destination-description {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.explore-button {
+  display: inline-block;
+  padding: 12px 24px;
+  background: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.explore-button:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .popular-destinations-section {
+    padding: 40px 0;
   }
-  
-  .popular-destinations-inner {
-    width: calc(100% - 40px); /* Zorg ervoor dat de container 100% breed is minus de marge */
-    margin: 0 20px; /* Voeg een marge van 20px toe aan de linker- en rechterkant */
-  }
-  
-  .destination-article {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: start;
-    margin: 0 0 40px 0;
-  }
-  
-  .destination-article:nth-of-type(even) {
-    flex-direction: row-reverse;
-  }
-  
-  .destination-image-wrapper {
-    flex: 1.4; /* Maak de afbeelding groter door de flex waarde te verhogen */
-    margin-right: 20px;
-  }
-  
-  .destination-article:nth-of-type(even) .destination-image-wrapper {
-    margin-right: 0;
-    margin-left: 20px;
-  }
-  
-  .destination-image-wrapper img {
-    width: 100%;
-    height: auto;
-    border-radius: 30px;
-    box-shadow: 0 20px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .destination-info {
-    flex: 2;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  
-  .destination-title-underline {
-    width: 60px;
-    height: 4px;
-    background-color: var(--primary-color);
-    margin-top: 10px; /* Voeg een marge van 10px toe aan de bovenkant */
-    margin-bottom: 10px; /* Voeg een marge van 20px toe aan de onderkant */
-  }
-  
-  .destination-info p {
-    margin: 10px 0;
-  }
-  
-  .destination-link {
-    display: inline-block;
-    margin: 40px auto 0 auto;
-    padding: 12px 26px;
-    font-size: 1.2rem;
-    background-color: var(--secondary-color);
-    color: white;
-    text-decoration: none;
-    border-radius: 10px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .destination-link:hover {
-    background-color: #1a2d20;
-    color: white;
-  }
-  
+
   .popular-destinations-container h1 {
-    font-size: 2.5rem;
-    color: black;
-    text-align: center;
-    margin-top: 0;
-    margin-bottom: 50px;
+    font-size: 2.2rem;
+    margin-bottom: 40px;
   }
-  
-  .popular-destinations-container h4 {
-    font-family: 'Arial Narrow Bold', sans-serif;
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: black;
-    /* border: #006fde 2px solid; */
-    margin-bottom: 0; /* Zorg ervoor dat er geen marge aan de onderkant is */
+
+  .destinations-grid {
+    grid-template-columns: 1fr;
   }
-  
-  .popular-destinations-container p {
-    font-size: 1.1rem;
-    color: black;
-    /* border: #006fde 2px solid; */
-  }
+}

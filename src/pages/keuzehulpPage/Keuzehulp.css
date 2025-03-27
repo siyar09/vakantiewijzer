@@ -1,175 +1,158 @@
+.quiz-wrapper {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 40px 20px;
+}
+
 .quiz-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-section {
   text-align: center;
-  padding: 20px;
-  max-width: 1300px; /* Voeg deze regel toe om de maximale breedte in te stellen */
-  height: 2000px; /* Voeg deze regel toe om de hoogte in te stellen */
-  margin: 40px auto; /* Voeg deze regel toe om de container te centreren */
+  padding: 40px 0;
 }
 
-.quiz-container h1 {
-  font-size: 2.6em;
-  margin-top: 40px;
+.welcome-section h1 {
+  font-size: 2.8rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.welcome-text {
+  font-size: 1.2rem;
+  color: #666;
   margin-bottom: 40px;
+  line-height: 1.6;
 }
 
-.recommendation h3 {
-  font-size: 2em;
-  color: black;
-  margin-top: 20px;
-  margin-bottom: 40px;
+.start-button,
+.next-button,
+.prev-button,
+.finish-button {
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
-
 
 .start-button {
-  padding: 18px 24px;
-  font-size: 1.4em;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: #4CAF50;
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
   color: white;
-  margin-bottom: 20px;
+  padding: 20px 40px;
+  font-size: 1.2rem;
+}
+
+.question-section {
+  text-align: center;
+  padding: 20px 0;
 }
 
 .question-number {
-  font-size: 1.4em;
-  color: #000000;
-}
-
-.progress-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 40px;
-  margin-bottom: 10px;
-  max-width: 600px; /* Voeg deze regel toe om de maximale breedte in te stellen */
-  margin: 0 auto; /* Voeg deze regel toe om de voortgangsbalk te centreren */
-}
-
-.progress {
-  height: 5px;
-  background-color: green;
-  transition: width 0.3s;
-}
-
-.answers {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 800px; /* Voeg deze regel toe om de maximale breedte in te stellen */
-  margin: 0 auto; /* Voeg deze regel toe om de antwoorden te centreren */
-}
-
-.answer-button {
-  padding: 10px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1em;
-  background-color: #34568B;
-}
-
-.answer-button.selected {
-  background-color: orange;
+  display: inline-block;
+  background: #e9ecef;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 1rem;
+  color: #495057;
 }
 
 .navigation-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 40px;
+  padding: 0 20px;
 }
 
-.navigation-buttons button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1em;
+.prev-button {
+  background-color: #e9ecef;
+  color: #495057;
 }
 
-.navigation-buttons button.next {
-  background-color: #4CAF50; /* Green color for the next button */
+.next-button {
+  background: #007bff;
+  color: white;
 }
 
-.navigation-buttons button.prev {
-  background-color: grey; /* Grey color for the previous button */
+.finish-button {
+  background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+  color: white;
 }
 
-.navigation-buttons button:disabled {
-  background-color: grey;
+.prev-button:disabled,
+.next-button:disabled,
+.finish-button:disabled {
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal {
-  background: white;
-  border-radius: 8px;
-  padding: 20px;
-  max-width: 500px;
-  width: 100%;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  position: relative;
-}
-
-.modal-content {
-  margin-bottom: 20px;
-}
-
-.modal-close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 1.5em;
-  cursor: pointer;
-}
-
 .loading-container {
+  padding: 40px;
   text-align: center;
-  margin-top: 20px;
 }
 
 .loading-bar {
   width: 100%;
-  height: 10px;
-  background-color: #ddd;
-  position: relative;
+  height: 6px;
+  background: #e9ecef;
+  border-radius: 3px;
   overflow: hidden;
-  border-radius: 5px;
-  margin-bottom: 10px;
+  position: relative;
 }
 
 .loading-bar::after {
-  content: "";
-  display: block;
-  width: 0%;
-  height: 100%;
-  background-color: #007bff;
+  content: '';
   position: absolute;
-  animation: loading 2s linear forwards;
-}
-
-@keyframes loading {
-  0% { width: 0%; }
-  100% { width: 100%; }
+  top: 0;
+  left: -30%;
+  width: 30%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, #007bff, transparent);
+  animation: loading 1.5s infinite;
 }
 
 .loading-text {
-  font-size: 18px;
-  font-weight: bold;
-  color: #333;
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: #495057;
 }
 
+@keyframes loading {
+  0% { left: -30%; }
+  100% { left: 130%; }
+}
+
+@media (max-width: 768px) {
+  .quiz-container {
+    padding: 20px;
+  }
+
+  .welcome-section h1 {
+    font-size: 2rem;
+  }
+
+  .start-button {
+    padding: 15px 30px;
+    font-size: 1.1rem;
+  }
+
+  .navigation-buttons {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .prev-button,
+  .next-button,
+  .finish-button {
+    width: 100%;
+  }
+}

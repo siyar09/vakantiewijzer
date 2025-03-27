@@ -1,32 +1,119 @@
 .search-container {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 60px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto 60px;
+}
+
+.search-input-wrapper {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 16px;
+  color: #666;
+  font-size: 1.2rem;
 }
 
 .search-input {
-  font-size: 15px;
-  width: 30%;
-  padding: 16px;
-  border: 1px solid #ffffff;
-  background-color: #ffffff;
-  color: black;
+  width: 100%;
+  padding: 16px 16px 16px 50px;
+  font-size: 16px;
+  border: 2px solid #e2e8f0;
+  background-color: white;
+  color: #2c3e50;
   border-radius: 15px 0 0 15px;
   outline: none;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #2d6a4f;
+  box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.1);
+}
+
+.clear-button {
+  position: absolute;
+  right: 16px;
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
 }
 
 .search-button {
-  padding: 16px 20px;
+  padding: 16px 32px;
   border: none;
-  background-color: #2c3e50;
+  background-color: #2d6a4f;
   color: white;
-  border: #2c3e50 solid 1px;
   border-radius: 0 15px 15px 0;
   cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
 .search-button:hover {
-  background-color: #34495e;
-  border: #34495e solid 1px;
+  background-color: #1a472a;
+}
+
+.suggestions-container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 8px;
+  z-index: 1000;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.suggestion-item {
+  padding: 12px 16px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.suggestion-city {
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.suggestion-country {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .search-container {
+    padding: 0 20px;
+  }
+
+  .search-input {
+    font-size: 14px;
+    padding: 14px 14px 14px 45px;
+  }
+
+  .search-button {
+    padding: 14px 20px;
+    font-size: 14px;
+  }
 }

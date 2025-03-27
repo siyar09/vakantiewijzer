@@ -1,0 +1,26 @@
+.recommendation {
+  padding: 20px;
+}
+
+.recommendation h3 {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.recommendation .city-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 20px 0;
+}
+
+.recommendation .city-item {
+  border: none;
+  transition: transform 0.3s ease;
+}
+
+.recommendation .city-item:hover {
+  transform: translateY(-5px);
+}

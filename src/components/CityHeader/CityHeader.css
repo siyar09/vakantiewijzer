@@ -1,0 +1,47 @@
+.city-header {
+    text-align: center;
+    padding: 24px 20px;
+    border-radius: 20px;
+}
+  
+.city-header h1 {
+    font-size: 2.4rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-weight: 600;
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+  
+.country-flag {
+    width: 48px;
+    height: 32px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+  
+.country-flag:hover {
+    transform: scale(1.1);
+}
+  
+@media (max-width: 768px) {
+    .city-header {
+        padding: 20px 15px;
+        margin-bottom: 20px;
+    }
+  
+    .city-header h1 {
+      font-size: 1.8rem;
+      gap: 10px;
+    }
+  
+    .country-flag {
+      width: 36px;
+      height: 24px;
+    }
+}

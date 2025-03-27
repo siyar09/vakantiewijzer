@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { FaUser, FaLock } from 'react-icons/fa';
+import axios from 'axios';
+import { useAuth } from '../../context/AuthContext';
 import Popup from '../../components/Popup/Popup';
 import FormGroup from '../../components/FormGroup/FormGroup';
 import './Login.css';
+
+const API_URL = 'https://frontend-educational-backend.herokuapp.com/api';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -11,6 +17,7 @@ const Login = () => {
   const [showErrorPopup, setShowErrorPopup] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,90 +25,126 @@ const Login = () => {
     if (!username || !password) {
       setErrorMessage('Vul zowel een gebruikersnaam als een wachtwoord in.');
       setShowErrorPopup(true);
-      setTimeout(() => {
-        setShowErrorPopup(false);
-      }, 5000);
+      setTimeout(() => setShowErrorPopup(false), 5000);
       return;
     }
 
-    const user = {
-      username,
-      password
-    };
-
     try {
-      const response = await fetch('https://api.datavortex.nl/vakantiewijzer/users/authenticate', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Api-Key': 'vakantiewijzer:7FZmMmmYlzUoPdSkAtzG'
-        },
-        body: JSON.stringify(user)
+      // Test eerst of de API bereikbaar is
+      await axios.get(`${API_URL}/test/all`);
+    
+      // Probeer in te loggen
+      const response = await axios.post(`${API_URL}/auth/signin`, {
+        username,
+        password
       });
-
-      const data = await response.json();
-      console.log('Server Response:', data); // Log de server response
-
-      if (response.ok) {
-        if (data.jwt) {
-          localStorage.setItem('token', data.jwt);
-          setShowSuccessPopup(true);
-          setTimeout(() => {
-            setShowSuccessPopup(false);
-            navigate('/');
-          }, 1000); // Hide popup and redirect after 5 seconds
-        } else {
-          setErrorMessage('Inloggen mislukt: Geen token ontvangen');
-          setShowErrorPopup(true);
-          setTimeout(() => {
-            setShowErrorPopup(false);
-          }, 4000);
-        }
-      } else {
-        setErrorMessage(`Inloggen mislukt: ${data.message || 'Onbekende fout'}`);
-        setShowErrorPopup(true);
+    
+      if (response.data.accessToken) {
+        login(response.data.accessToken);
+        setShowSuccessPopup(true);
         setTimeout(() => {
-          setShowErrorPopup(false);
-        }, 5000);
+          setShowSuccessPopup(false);
+          navigate('/'); // Navigeer naar de homepagina bij suuccesvolle inlog
+        }, 2000);
+      } else {
+        throw new Error('Geen token ontvangen');
       }
     } catch (error) {
-      console.error('Error:', error);
-      setErrorMessage('Er is een fout opgetreden. Probeer het opnieuw.');
+      console.error('Login error:', error);
+      const errorMsg = error.response?.data?.message || 
+        'Inloggen mislukt. Controleer je gebruikersnaam en wachtwoord.';
+      setErrorMessage(errorMsg);
       setShowErrorPopup(true);
-      setTimeout(() => {
-        setShowErrorPopup(false);
-      }, 5000);
+      setTimeout(() => setShowErrorPopup(false), 5000);
     }
   };
 
   return (
-    <div className="login-container">
-      {showSuccessPopup && <Popup type="success" message="Inloggen succesvol!" />}
-      {showErrorPopup && <Popup type="error" message={errorMessage} />}
-      <h2>Inloggen</h2>
-      <form onSubmit={handleSubmit}>
-        <FormGroup label="Gebruikersnaam:">
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </FormGroup>
-        <FormGroup label="Wachtwoord:">
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </FormGroup>
-        <button type="submit" className="login-button">Inloggen</button>
-      </form>
-      <p>Nog geen account? <Link to="/registreren">Registreer hier</Link></p>
-    </div>
+    <motion.div 
+      className="login-wrapper"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="login-container">
+        {showSuccessPopup && <Popup type="success" message="Inloggen succesvol!" />}
+        {showErrorPopup && <Popup type="error" message={errorMessage} />}
+        
+        <motion.div 
+          className="login-header"
+          initial={{ y: -20 }}
+          animate={{ y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2>Welkom!</h2>
+          <p>Log in om je reis voorkeuren op te slaan</p>
+        </motion.div>
+
+        <form onSubmit={handleSubmit}>
+          <motion.div
+            initial={{ x: -20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <FormGroup 
+              label="Gebruikersnaam" 
+              icon={<FaUser />}
+            >
+              <input
+                type="text"
+                id="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Voer je gebruikersnaam in"
+                required
+              />
+            </FormGroup>
+          </motion.div>
+
+          <motion.div
+            initial={{ x: -20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <FormGroup 
+              label="Wachtwoord" 
+              icon={<FaLock />}
+            >
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Voer je wachtwoord in"
+                required
+              />
+            </FormGroup>
+          </motion.div>
+
+          <motion.button
+            type="submit"
+            className="login-button"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            Inloggen
+          </motion.button>
+        </form>
+
+        <motion.p 
+          className="register-link"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+        >
+          Nog geen account?
+          <Link to="/registreren">Registreer hier</Link>
+        </motion.p>
+      </div>
+    </motion.div>
   );
 };
 

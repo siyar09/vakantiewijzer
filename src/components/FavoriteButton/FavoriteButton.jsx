@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {jwtDecode} from 'jwt-decode';
+import { motion } from 'framer-motion';
+import Popup from '../Popup/Popup';
 import './FavoriteButton.css';
 
 const FavoriteButton = ({ city }) => {
@@ -7,6 +9,7 @@ const FavoriteButton = ({ city }) => {
   const [username, setUsername] = useState('');
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
+  const [popupType, setPopupType] = useState('success');
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -27,27 +30,36 @@ const FavoriteButton = ({ city }) => {
       localStorage.setItem(`favorites_${username}`, JSON.stringify(newFavorites));
       setIsFavorite(false);
       setPopupMessage('Verwijderd uit favorieten');
+      setPopupType('error'); // Rood voor verwijderen
     } else {
       favorites.push(city);
       localStorage.setItem(`favorites_${username}`, JSON.stringify(favorites));
       setIsFavorite(true);
       setPopupMessage('Toegevoegd aan favorieten');
+      setPopupType('success'); // Groen voor toevoegen
     }
     setShowPopup(true);
     setTimeout(() => {
       setShowPopup(false);
-    }, 3000); // Verberg de popup na 3 seconden
+    }, 3000);
   };
 
   return (
     <>
-      <button className={`favorite-button ${isFavorite ? 'favorite' : ''}`} onClick={handleFavoriteClick}>
+      <motion.button 
+        className={`favorite-button ${isFavorite ? 'favorite' : ''}`} 
+        onClick={handleFavoriteClick}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        aria-label={isFavorite ? 'Verwijder uit favorieten' : 'Voeg toe aan favorieten'}
+      >
         {isFavorite ? '❤️' : '♡'}
-      </button>
+      </motion.button>
       {showPopup && (
-        <div className="favorite-popup">
-          {popupMessage}
-        </div>
+        <Popup 
+          type={popupType}
+          message={popupMessage}
+        />
       )}
     </>
   );
