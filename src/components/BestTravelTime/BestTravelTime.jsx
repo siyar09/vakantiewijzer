@@ -17,7 +17,7 @@ const determineBestTravelTime = (temperature) => {
     return TRAVEL_TIMES.SUMMER;
   } else if (temperature > 10 && temperature <= 20) {
     return TRAVEL_TIMES.SPRING_FALL;
-  } else if (temperature > 20 && temperature <= 28) {
+  } else if (temperature > 20 && temperature <= 50) {
     return TRAVEL_TIMES.FALL_SUMMER;
   } else {
     return TRAVEL_TIMES.WARM;

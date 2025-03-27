@@ -9,7 +9,7 @@ import {
   FaCampground, 
   FaList 
 } from 'react-icons/fa';
-import NotificationBar from '../../components/NotificationBar/NotificationBar';
+import Popup from '../../components/Popup/Popup';
 import ChecklistSection from '../../components/ChecklistSection/ChecklistSection';
 import './ReisCheck.css';
 
@@ -163,11 +163,11 @@ const ReisCheck = () => {
       
       setTimeout(() => {
         setIsNotificationVisible(false);
-      }, 3000);
+      }, 2000); // voor 2 seconden tonen 
     } catch (error) {
       console.error('Error saving checklist:', error);
     }
-  };
+};
 
   return (
     <motion.div 
@@ -176,10 +176,12 @@ const ReisCheck = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <NotificationBar 
-        isVisible={isNotificationVisible} 
-        message="Je checklist is opgeslagen!" 
-      />
+      {isNotificationVisible && (
+        <Popup 
+          type="success"
+          message="Je checklist is opgeslagen!" 
+        />
+      )}
 
       <div className="reis-check-container">
         <motion.div 

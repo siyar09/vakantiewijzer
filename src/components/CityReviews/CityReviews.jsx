@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './CityReviews.css';
 
 const YELP_API_KEY = import.meta.env.VITE_APP_YELP_API_KEY;
 

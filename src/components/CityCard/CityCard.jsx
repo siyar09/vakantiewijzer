@@ -37,6 +37,7 @@ const CityCard = ({ city, showDetails, showDescriptionOnly }) => {
   }, [city.city]);
 
   const handleMoreInfoClick = () => {
+    window.scrollTo(0, 0);
     navigate(`/city/${city.city}`, { state: { city } });
   };
 

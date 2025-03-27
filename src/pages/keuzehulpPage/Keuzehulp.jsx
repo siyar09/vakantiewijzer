@@ -152,7 +152,7 @@ const Keuzehulp = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Start De Reis
+                Start Je Reis
               </motion.button>
             </motion.div>
           ) : (

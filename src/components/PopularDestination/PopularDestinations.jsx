@@ -1,9 +1,10 @@
 import React from 'react';
-import './PopularDestinations.css';
+import { useNavigate } from 'react-router-dom'; 
+import { motion } from 'framer-motion';
 import CityImage from '../CityImage/CityImage';
 import descriptions from '../../data/descriptions.json';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import './PopularDestinations.css';
+
 
 const destinations = [
   {
@@ -13,20 +14,27 @@ const destinations = [
     highlight: 'De stad van de toekomst'
   },
   { 
-    city: 'New York', 
-    country: 'United States', 
-    budget: 'Duur',
-    highlight: 'De stad die nooit slaapt' 
-  },
-  { 
     city: 'Paris', 
     country: 'France', 
     budget: 'Gemiddeld',
     highlight: 'Stad van de liefde en cultuur' 
   },
+  { 
+    city: 'New York', 
+    country: 'United States', 
+    budget: 'Duur',
+    highlight: 'De stad die nooit slaapt' 
+  }
 ];
 
 const PopularDestinations = () => {
+  const navigate = useNavigate();  // Voeg deze hook toe bovenaan de component
+
+  const handleExploreClick = (destination) => {
+    window.scrollTo(0, 0);
+    navigate(`/city/${destination.city}`, { state: { city: destination } });
+  };
+
   return (
     <section className="popular-destinations-section">
       <div className="popular-destinations-container">
@@ -59,13 +67,11 @@ const PopularDestinations = () => {
                 <h3>{destination.city}, {destination.country}</h3>
                 <p className="destination-highlight">{destination.highlight}</p>
                 <p className="destination-description">{descriptions[destination.city]}</p>
-                <Link 
-                  to={`/city/${destination.city}`} 
-                  className="explore-button"
-                  state={{ city: destination }}
-                >
-                  Ontdek Meer
-                </Link>
+                <button 
+                    onClick={() => handleExploreClick(destination)}
+                    className="explore-button">
+                    Ontdek Meer
+                  </button>
               </div>
             </motion.article>
           ))}

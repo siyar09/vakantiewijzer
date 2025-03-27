@@ -111,6 +111,13 @@
   text-decoration: underline;
 }
 
+.password-requirements {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.8rem;
+  color: #666;
+}
+
 @media (max-width: 768px) {
   .signup-container {
     padding: 30px 20px;

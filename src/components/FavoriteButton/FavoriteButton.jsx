@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {jwtDecode} from 'jwt-decode';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
+import Popup from '../Popup/Popup';
 import './FavoriteButton.css';
 
 const FavoriteButton = ({ city }) => {
@@ -8,6 +9,7 @@ const FavoriteButton = ({ city }) => {
   const [username, setUsername] = useState('');
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
+  const [popupType, setPopupType] = useState('success');
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -28,16 +30,18 @@ const FavoriteButton = ({ city }) => {
       localStorage.setItem(`favorites_${username}`, JSON.stringify(newFavorites));
       setIsFavorite(false);
       setPopupMessage('Verwijderd uit favorieten');
+      setPopupType('error'); // Rood voor verwijderen
     } else {
       favorites.push(city);
       localStorage.setItem(`favorites_${username}`, JSON.stringify(favorites));
       setIsFavorite(true);
       setPopupMessage('Toegevoegd aan favorieten');
+      setPopupType('success'); // Groen voor toevoegen
     }
     setShowPopup(true);
     setTimeout(() => {
       setShowPopup(false);
-    }, 3000); // Verbergt de popup na 3 seconden
+    }, 3000);
   };
 
   return (
@@ -51,19 +55,12 @@ const FavoriteButton = ({ city }) => {
       >
         {isFavorite ? '❤️' : '♡'}
       </motion.button>
-      <AnimatePresence mode="wait">
-        {showPopup && (
-          <motion.div 
-            className="favorite-popup"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            transition={{ duration: 0.3 }}
-          >
-            {popupMessage}
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {showPopup && (
+        <Popup 
+          type={popupType}
+          message={popupMessage}
+        />
+      )}
     </>
   );
 };

@@ -19,6 +19,8 @@ import Account from './pages/accountPage/Account';
 import AlgemeneInfo from './pages/algemeneInfoPage/AlgemenInfo';
 import Privacy from './pages/privacyPage/Privacy';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import NotFound from './pages/notFoundPage/NotFound';
+
 
 function App() {
   return (
@@ -45,6 +47,7 @@ function App() {
           <Route path="/account" element={<ProtectedRoute element={Account} />} />
           <Route path="/algemene-informatie" element={<AlgemeneInfo />} />
           <Route path="/privacybeleid" element={<Privacy />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
       </AuthProvider>

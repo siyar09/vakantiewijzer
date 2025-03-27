@@ -4,52 +4,67 @@ const reviews = [
   {
     name: 'Jan Jansen',
     rating: '⭐⭐⭐⭐⭐',
-    review: 'VakantieWijzer maakte mijn trip naar {city} geweldig! De aanbevelingen waren perfect afgestemd op mijn voorkeuren. Heel gebruiksvriendelijk, ik raad het zeker aan!'
+    review: 'VakantieWijzer maakte mijn reis naar {city} onvergetelijk! De tips waren precies wat ik zocht. Alles was perfect afgestemd op mijn voorkeuren. Ik ben enorm tevreden!'
   },
   {
     name: 'Maria de Vries',
     rating: '⭐⭐⭐⭐',
-    review: '{city} was fantastisch, en de website hielp me de verborgen juweeltjes van de stad te ontdekken. Had af en toe wat bugs, maar verder top!'
+    review: 'Mijn trip naar {city} was fantastisch, vooral dankzij de website. De aanbevolen plekken waren geweldig, al waren er af en toe wat technische problemen.'
   },
   {
     name: 'Peter van Dijk',
     rating: '⭐⭐⭐⭐⭐',
-    review: 'Met deze website ontdekte ik {city} op een unieke manier. Geweldige tips en alles was makkelijk te vinden. Zeker een aanrader!'
+    review: 'VakantieWijzer bracht mij naar verborgen pareltjes in {city}. Het was een geweldige ervaring, alles was zo makkelijk te vinden. Zeer handig en betrouwbaar!'
   },
   {
     name: 'Sophie de Boer',
     rating: '⭐⭐⭐⭐',
-    review: 'De tips voor {city} waren erg nuttig en hebben mijn reiservaring verbeterd. Een paar kleine verbeterpunten, maar over het algemeen zeer tevreden!'
+    review: 'De tips voor {city} waren waardevol en hebben mijn reis echt verrijkt. De website is gebruiksvriendelijk, al kan er nog wat verbetering komen in de snelheid.'
   },
   {
     name: 'Kees van der Meer',
     rating: '⭐⭐⭐⭐⭐',
-    review: 'Fantastische ervaring met VakantieWijzer in {city}. De aanbevelingen waren spot-on en hebben mijn reis onvergetelijk gemaakt!'
+    review: 'De ervaring met VakantieWijzer in {city} was top! De suggesties waren uitstekend en hebben mijn vakantie echt bijzonder gemaakt.'
   },
   {
     name: 'Laura Bakker',
     rating: '⭐⭐⭐⭐',
-    review: 'Dankzij VakantieWijzer heb ik {city} op een geweldige manier kunnen verkennen. De tips waren erg nuttig!'
+    review: 'Met VakantieWijzer ontdekte ik {city} op een nieuwe manier. De tips waren perfect, maar soms miste ik wat gedetailleerdere informatie.'
   },
   {
     name: 'Tom de Jong',
     rating: '⭐⭐⭐⭐⭐',
-    review: 'Mijn reis naar {city} was fantastisch dankzij de aanbevelingen van VakantieWijzer. Zeer aan te raden!'
+    review: 'Mijn reis naar {city} was geweldig dankzij de handige tips van VakantieWijzer. Het is echt een aanrader voor iedereen die op zoek is naar goede aanbevelingen!'
   },
   {
     name: 'Emma Visser',
     rating: '⭐⭐⭐⭐',
-    review: 'VakantieWijzer heeft mijn reis naar {city} echt verbeterd. De aanbevelingen waren geweldig!'
+    review: 'VakantieWijzer gaf me de beste tips voor {city}. De website is praktisch, al kan de navigatie iets sneller. Maar verder ben ik erg tevreden!'
   },
   {
     name: 'Lucas Smit',
     rating: '⭐⭐⭐⭐⭐',
-    review: 'Geweldige ervaring met VakantieWijzer in {city}. De tips waren perfect en maakten mijn reis onvergetelijk!'
+    review: 'VakantieWijzer in {city} was geweldig! De aanbevelingen waren precies wat ik nodig had en maakten mijn vakantie onvergetelijk. Heel erg blij met deze website!'
   },
   {
     name: 'Anna de Groot',
     rating: '⭐⭐⭐⭐',
-    review: 'De aanbevelingen voor {city} waren erg nuttig. Een paar kleine verbeterpunten, maar over het algemeen zeer tevreden!'
+    review: 'De website was handig voor mijn reis naar {city}. De tips waren erg goed, maar er zijn een paar dingen die ik zou verbeteren voor een nog betere ervaring.'
+  },
+  {
+    name: 'Mark van der Meer',
+    rating: '⭐⭐⭐⭐⭐',
+    review: 'VakantieWijzer verbeterde mijn reis naar {city} enorm! De aanbevolen activiteiten waren perfect en ik heb zoveel meer gezien dan ik anders zou hebben gedaan.'
+  },
+  {
+    name: 'Femke de Boer',
+    rating: '⭐⭐⭐⭐',
+    review: 'VakantieWijzer gaf me fantastische tips voor {city}. De ervaring was uitstekend, alleen het laden van de pagina’s kon soms wat sneller zijn.'
+  },
+  {
+    name: 'Jasper Bakker',
+    rating: '⭐⭐⭐⭐⭐',
+    review: 'Mijn ervaring met VakantieWijzer in {city} was fantastisch! De suggesties waren precies wat ik nodig had en hebben mijn reis echt bijzonder gemaakt. Zeker een aanrader!'
   }
 ];
 
