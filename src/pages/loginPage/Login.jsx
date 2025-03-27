@@ -77,7 +77,7 @@ const Login = () => {
           transition={{ duration: 0.6 }}
         >
           <h2>Welkom!</h2>
-          <p>Log in om je reis voorkeuren op te slaan</p>
+          <p>Log in en ontdek bestemmingen die perfect bij je passen</p>
         </motion.div>
 
         <form onSubmit={handleSubmit}>
