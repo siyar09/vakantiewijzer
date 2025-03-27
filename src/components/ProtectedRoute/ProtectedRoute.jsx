@@ -1,6 +1,6 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import LoginRequired from '../LoginRequired/LoginRequired';
 
 const ProtectedRoute = ({ element: Component, ...rest }) => {
   const { isAuthenticated, loading } = useAuth();
@@ -9,7 +9,7 @@ const ProtectedRoute = ({ element: Component, ...rest }) => {
     return <div>Loading...</div>; 
   }
 
-  return isAuthenticated ? <Component {...rest} /> : <Navigate to="/mijn-account" />;
+  return isAuthenticated ? <Component {...rest} /> : <LoginRequired />;
 };
 
 export default ProtectedRoute;
