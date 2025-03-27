@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
-const API_KEY = '385974b44bbc42e1758a483f6186cf8d';
+const API_KEY = import.meta.env.VITE_APP_WEATHER_API_KEY;
 
 const CityWeather = React.memo(({ city }) => {
   const [weather, setWeather] = useState({ temperature: '', weatherDescription: '' });
@@ -8,15 +9,21 @@ const CityWeather = React.memo(({ city }) => {
   useEffect(() => {
     const fetchWeather = async () => {
       try {
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`);
-        const data = await response.json();
-        if (data?.main) {
-          const temperature = Math.round(data.main.temp);
-          const weatherDescription = data.weather[0].description;
+        const response = await axios.get('https://api.openweathermap.org/data/2.5/weather', {
+          params: {
+            q: city,
+            appid: API_KEY,
+            units: 'metric'
+          }
+        });
+
+        if (response.data?.main) {
+          const temperature = Math.round(response.data.main.temp);
+          const weatherDescription = response.data.weather[0].description;
           setWeather({ temperature, weatherDescription });
         }
       } catch (error) {
-        console.error(`Fout bij het ophalen van weer voor ${city}:`, error);
+        console.error(`Fout bij het ophalen van weer voor ${city}:`, error.response?.data || error.message);
       }
     };
 
@@ -29,5 +36,7 @@ const CityWeather = React.memo(({ city }) => {
     </div>
   );
 });
+
+CityWeather.displayName = 'CityWeather';
 
 export default CityWeather;

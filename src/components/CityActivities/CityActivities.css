@@ -1,0 +1,94 @@
+.city-activities {
+    margin-bottom: 20px;
+}
+  
+.city-activities h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #2c3e50;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid black;
+}
+  
+.activities-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 15px;
+}
+  
+.activities-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+  
+.activities-list li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+  
+.activity-name {
+    font-size: 1rem;
+    color: #2c3e50;
+}
+  
+.activity-rating {
+    display: flex;
+    gap: 2px;
+}
+  
+.star {
+    font-size: 0.9rem;
+}
+  
+.loading-state,
+.error-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 30px;
+    text-align: center;
+    color: #666;
+}
+  
+.spinner {
+    animation: spin 1s linear infinite;
+    font-size: 1.5rem;
+    color: #2d6a4f;
+}
+  
+.error-icon {
+    color: #ef4444;
+    font-size: 1.5rem;
+}
+  
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+  
+@media (max-width: 768px) {
+    .city-activities {
+      padding: 20px;
+    }
+  
+    .activities-list li {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+  
+    .activity-rating {
+      align-self: flex-start;
+    }
+}

@@ -1,25 +1,38 @@
 import React from 'react';
 
-const getCurrentSeason = () => {
-  const month = new Date().getMonth();
-  if (month >= 2 && month <= 4) return 'Lente';
-  if (month >= 5 && month <= 7) return 'Zomer';
-  if (month >= 8 && month <= 10) return 'Herfst';
-  return 'Winter';
+export const TRAVEL_TIMES = {
+  WINTER: 'Winter',
+  SPRING_FALL: 'Lente/Herfst',
+  FALL_SUMMER: 'Herfst/Zomer',
+  SUMMER: 'Zomer',
 };
 
-const determineBestTravelTime = () => {
-  const currentSeason = getCurrentSeason();
-  return currentSeason;
+const determineBestTravelTime = (temperature) => {
+  if (!temperature) return 'Onbekend';
+  
+  // Bepaal beste reistijd op basis van temperatuur
+  if (temperature <= 0) { 
+    return TRAVEL_TIMES.SUMMER;
+  } else if (temperature > 0 && temperature <= 10) {
+    return TRAVEL_TIMES.SUMMER;
+  } else if (temperature > 10 && temperature <= 20) {
+    return TRAVEL_TIMES.SPRING_FALL;
+  } else if (temperature > 20 && temperature <= 28) {
+    return TRAVEL_TIMES.FALL_SUMMER;
+  } else {
+    return TRAVEL_TIMES.WARM;
+  }
 };
 
-const BestTravelTime = ({ bestTravelTime }) => {
+const BestTravelTime = ({ temperature }) => {
+  const bestTravelTime = determineBestTravelTime(temperature);
+  
   return (
     <div> 
-      <p><strong>Beste reistijd: </strong>{bestTravelTime || determineBestTravelTime()}</p>
+      <p><strong>Beste reistijd: </strong>{bestTravelTime}</p>
     </div>
   );
 };
 
-export { getCurrentSeason, determineBestTravelTime };
+export { determineBestTravelTime };
 export default BestTravelTime;

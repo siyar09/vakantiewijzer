@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
-import countries from '../components/Countries/Countries';
+import countries from '../data/Countries';
 import { fetchExchangeRate, calculatePriceDifference } from '../components/BudgetCategory/BudgetCategory';
 import { determineBestTravelTime } from '../components/BestTravelTime/BestTravelTime';
+
+const WEATHER_API_KEY = import.meta.env.VITE_APP_WEATHER_API_KEY;
 
 const useCityData = () => {
   const [cityData, setCityData] = useState([]);
@@ -16,27 +18,40 @@ const useCityData = () => {
     const fetchCityData = async () => {
       try {
         const fetchedData = [];
-
         const nlExchangeRate = await fetchExchangeRate('EUR');
         setNlExchangeRate(nlExchangeRate);
 
         for (let { city, country, countryCode, currencyCode } of countries) {
-          const cityExchangeRate = await fetchExchangeRate(currencyCode);
-          if (cityExchangeRate === null) continue;
+          try {
+            // Fetch weer data
+            const weatherResponse = await fetch(
+              `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${WEATHER_API_KEY}&units=metric`
+            );
+            const weatherData = await weatherResponse.json();
+            
+            // Get exchange rate
+            const cityExchangeRate = await fetchExchangeRate(currencyCode);
+            if (cityExchangeRate === null) continue;
 
-          const bestTravelTime = determineBestTravelTime();
+            // Bereken de temperatuur en bepaal de beste reistijd
+            const temperature = weatherData?.main?.temp ? Math.round(weatherData.main.temp) : null;
+            const bestTravelTime = determineBestTravelTime(temperature);
+            const budgetCategory = calculatePriceDifference(cityExchangeRate, nlExchangeRate);
 
-          const budgetCategory = calculatePriceDifference(cityExchangeRate, nlExchangeRate);
+            const cityInfo = {
+              city,
+              country,
+              temperature,
+              budget: budgetCategory,
+              bestTravelTime,
+              currentWeather: weatherData?.weather?.[0]?.description || "Onbekend",
+              countryCode
+            };
 
-          const cityInfo = {
-            city,
-            country,
-            budget: budgetCategory,
-            bestTravelTime,
-            currentWeather: "4°C, broken clouds" // Voeg huidige weerinformatie toe
-          };
-
-          fetchedData.push(cityInfo);
+            fetchedData.push(cityInfo);
+          } catch (error) {
+            console.error(`Error fetching data for ${city}:`, error);
+          }
         }
 
         setCityData(fetchedData);
@@ -61,7 +76,10 @@ const useCityData = () => {
     }
 
     if (filters.bestTime) {
-      data = data.filter(city => city.bestTravelTime.toLowerCase() === filters.bestTime.toLowerCase());
+      data = data.filter(city => {
+        const cityBestTime = determineBestTravelTime(city.temperature);
+        return cityBestTime === filters.bestTime;
+      });
     }
 
     if (filters.budget) {
@@ -75,9 +93,8 @@ const useCityData = () => {
     setFilteredCityData(data);
   }, [searchTerm, filters, sort, cityData]);
 
-  const handleSearch = (event) => {
-    const searchTerm = event.target.value.toLowerCase();
-    setSearchTerm(searchTerm);
+  const handleSearch = (searchTerm) => {
+    setSearchTerm(searchTerm.toLowerCase());
   };
 
   const handleFilterChange = (filterType, value) => {

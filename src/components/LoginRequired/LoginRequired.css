@@ -1,0 +1,101 @@
+.login-required-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 20px;
+}
+  
+.login-required-content {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 50px 40px;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(84, 84, 84, 0.2);
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+  
+.login-required-content h1 {
+    font-size: 2.8rem;
+    color: #1e293b;
+    margin-bottom: 24px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+  
+.login-required-content p {
+    font-size: 1.25rem;
+    color: #475569;
+    margin-bottom: 35px;
+    line-height: 1.6;
+}
+  
+.login-required-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+  
+.login-button,
+.home-button1 {
+    padding: 14px 32px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    min-width: 160px;
+}
+  
+.login-button {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+  
+.login-button:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    transform: translateY(-2px);
+    color: white;
+    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+}
+  
+.home-button1 {
+    background: #f8fafc;
+    color: #1e293b;
+    border: 2px solid #e2e8f0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.home-button1:hover {
+    background: #f1f5f9;
+    color: #1e293b;
+    transform: translateY(-2px);
+    border-color: #e2e8f0;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+  
+@media (max-width: 480px) {
+    .login-required-content {
+      padding: 30px 20px;
+    }
+  
+    .login-required-content h1 {
+      font-size: 2.2rem;
+    }
+  
+    .login-required-content p {
+      font-size: 1.1rem;
+    }
+  
+    .login-button,
+    .home-button1 {
+      width: 100%;
+      padding: 12px 20px;
+    }
+}

@@ -1,34 +1,68 @@
 import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import axios from 'axios';
+
+// Create custom axios instance for Nominatim
+const nominatimApi = axios.create({
+  baseURL: 'https://nominatim.openstreetmap.org',
+  params: {
+    format: 'json'
+  }
+});
 
 const CityMap = ({ city, country }) => {
   const [coordinates, setCoordinates] = useState({ lat: 0, lon: 0 });
   const [countryCoordinates, setCountryCoordinates] = useState({ lat: 0, lon: 0 });
   const [destination, setDestination] = useState('');
   const [distance, setDistance] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchCoordinates = async () => {
       try {
-        const countryResponse = await fetch(`https://restcountries.com/v3.1/name/${country}?fields=latlng`);
-        const countryData = await countryResponse.json();
-        if (countryData && countryData.length > 0 && countryData[0].latlng) {
-          setCountryCoordinates({ lat: countryData[0].latlng[0], lon: countryData[0].latlng[1] });
+        // Get country coordinates
+        const countryResponse = await axios.get(`https://restcountries.com/v3.1/name/${country}`, {
+          params: {
+            fields: 'latlng'
+          }
+        });
+
+        if (countryResponse.data && countryResponse.data.length > 0 && countryResponse.data[0].latlng) {
+          setCountryCoordinates({ 
+            lat: countryResponse.data[0].latlng[0], 
+            lon: countryResponse.data[0].latlng[1] 
+          });
         }
 
-        const geonameResponse = await fetch(`https://api.opentripmap.com/0.1/en/places/geoname?name=${city}&apikey=5ae2e3f221c38a28845f05b6c29b94fa1a39d84c4599724707a819e9`);
-        const geonameData = await geonameResponse.json();
-        if (geonameData && geonameData.lon && geonameData.lat) {
-          setCoordinates({ lat: geonameData.lat, lon: geonameData.lon });
+        // Get city coordinates using Nominatim
+        const cityResponse = await nominatimApi.get('/search', {
+          params: {
+            q: `${city}, ${country}`,
+            limit: 1
+          }
+        });
+
+        if (cityResponse.data && cityResponse.data.length > 0) {
+          setCoordinates({
+            lat: parseFloat(cityResponse.data[0].lat),
+            lon: parseFloat(cityResponse.data[0].lon)
+          });
         } else {
           throw new Error(`Geen coördinaten gevonden voor ${city}.`);
         }
       } catch (error) {
         console.error('Fout bij ophalen coördinaten:', error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
-    fetchCoordinates();
+    // Add delay to respect Nominatim usage policy
+    const timeoutId = setTimeout(() => {
+      fetchCoordinates();
+    }, 1000);
+
+    return () => clearTimeout(timeoutId);
   }, [city, country]);
 
   const calculateDistance = (lat1, lon1, lat2, lon2) => {
@@ -41,17 +75,32 @@ const CityMap = ({ city, country }) => {
       Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
       Math.sin(dLon / 2) * Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return R * c; // Distance in kilometers
+    return R * c;
   };
 
   const handleCalculateDistance = async () => {
+    if (!destination.trim()) {
+      setDistance('Voer een bestemming in.');
+      return;
+    }
+
     try {
-      const response = await fetch(`https://nominatim.openstreetmap.org/search?q=${destination}&format=json&limit=1`);
-      const data = await response.json();
-      if (data.length > 0) {
-        const destCoordinates = data[0];
-        const dist = calculateDistance(coordinates.lat, coordinates.lon, parseFloat(destCoordinates.lat), parseFloat(destCoordinates.lon));
-        setDistance(Math.round(dist)); // Rond de afstand af naar een geheel getal
+      const response = await nominatimApi.get('/search', {
+        params: {
+          q: destination,
+          limit: 1
+        }
+      });
+
+      if (response.data && response.data.length > 0) {
+        const destCoordinates = response.data[0];
+        const dist = calculateDistance(
+          coordinates.lat,
+          coordinates.lon,
+          parseFloat(destCoordinates.lat),
+          parseFloat(destCoordinates.lon)
+        );
+        setDistance(Math.round(dist));
       } else {
         setDistance('Geen coördinaten gevonden voor de opgegeven locatie.');
       }
@@ -67,11 +116,19 @@ const CityMap = ({ city, country }) => {
     }
   };
 
+  if (isLoading) {
+    return <div>Kaart laden...</div>;
+  }
+
   return (
     <div className='city-map'>
       <h2>Kaart</h2>
       <hr />
-      <MapContainer center={[countryCoordinates.lat, countryCoordinates.lon]} zoom={1} style={{ height: '400px', width: '100%' }}>
+      <MapContainer 
+        center={[countryCoordinates.lat, countryCoordinates.lon]} 
+        zoom={1.3} 
+        style={{ height: '400px', width: '100%' }}
+      >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -92,7 +149,7 @@ const CityMap = ({ city, country }) => {
           onKeyPress={handleKeyPress}
         />
         <button onClick={handleCalculateDistance}>Bereken afstand</button>
-        {distance && <p>De reis afstand is: {distance} km</p>}
+        {distance && <p>De reis afstand is: {typeof distance === 'number' ? `${distance} km` : distance}</p>}
       </div>
     </div>
   );

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaChevronDown } from 'react-icons/fa';
 import './FAQSection.css';
 
 const FAQSection = () => {
@@ -10,28 +12,28 @@ const FAQSection = () => {
 
   const faqs = [
     {
-      category: 'Over de Quiz',
+      category: 'Over de Keuzehulp',
       questions: [
         {
-          question: 'Hoe werkt de quiz?',
-          answer: 'De quiz helpt je bij het vinden van de perfecte vakantiebestemming door middel van een slimme vragenlijst die jouw voorkeuren analyseert.',
+          question: 'Hoe werkt de keuzehulp?',
+          answer: 'De keuzehulp helpt je bij het vinden van de perfecte vakantiebestemming door middel van een slimme vragenlijst die jouw voorkeuren analyseert.',
         },
         {
-          question: 'Is de quiz gratis?',
-          answer: 'Nee, de quiz is niet gratis. De Quiz is alleen te gebruiken voor gebruikers die lid van VakantieWijzer zijn.',
+          question: 'Is de keuzehulp gratis?',
+          answer: 'Ja, de keuzehulp is gratis. De keuzehulp is alleen te gebruiken voor gebruikers die lid van VakantieWijzer zijn.',
         },
         {
-          question: 'Hoe lang duurt de quiz?',
-          answer: 'De quiz duurt ongeveer 2 minuten om te voltooien.',
+          question: 'Hoe lang duurt de keuzehulp?',
+          answer: 'De keuzehulp duurt ongeveer 2 minuten om te voltooien.',
         },
         {
-          question: 'Kan ik de quiz opnieuw doen?',
-          answer: 'Ja, je kunt de quiz zo vaak doen als je wilt.',
+          question: 'Kan ik de keuzehulp opnieuw doen?',
+          answer: 'Ja, je kunt de keuzehulp zo vaak doen als je wilt.',
         },
       ],
     },
     {
-      category: 'Over de bestemmingen',
+      category: 'Over de Bestemmingen',
       questions: [
         {
           question: 'Welke bestemmingen zijn beschikbaar?',
@@ -39,7 +41,7 @@ const FAQSection = () => {
         },
         {
           question: 'Kan ik mijn favoriete bestemmingen opslaan?',
-          answer: 'Ja, je kunt je favoriete bestemmingen opslaan door een account aan te maken en in te loggen.',
+          answer: 'Ja, je kunt je favoriete bestemmingen opslaan door een account aan te maken en in te loggen. Je kunt een favoriet toevoegen door op het hartpictogram te klikken, bij de bestemmingen waar je op klikt.',
         },
         {
           question: 'Hoe vaak worden nieuwe bestemmingen toegevoegd?',
@@ -47,7 +49,7 @@ const FAQSection = () => {
         },
         {
           question: 'Kan ik bestemmingen filteren op basis van mijn voorkeuren?',
-          answer: 'Ja, je kunt bestemmingen filteren op basis van verschillende criteria zoals budget, beste reisperiode en meer.',
+          answer: 'Ja, je kunt bestemmingen filteren op basis van verschillende criteria zoals budget, beste reisperiode en sorteren op alfabet.',
         },
       ],
     },
@@ -94,33 +96,63 @@ const FAQSection = () => {
       ],
     },
   ];
-
-  return (
-    <section className="faq-section">
-      <h2>FAQ - Veelgestelde Vragen</h2>
-      {faqs.map((faq, index) => (
-        <div
-          key={index}
-          className={`faq-item ${activeIndex === index ? 'active' : ''}`}
-          onClick={() => toggleFAQ(index)}
+  
+    return (
+      <section className="faq-section">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
         >
-          <div className="faq-category">
-            {activeIndex === index ? '-' : '+'} {faq.category}
-          </div>
-          {activeIndex === index && (
-            <div className="faq-questions">
-              {faq.questions.map((q, i) => (
-                <div key={i} className="faq-question-answer">
-                  <div className="faq-question">{q.question}</div>
-                  <div className="faq-answer">{q.answer}</div>
-                </div>
-              ))}
+          Veelgestelde Vragen
+        </motion.h2>
+        {faqs.map((faq, index) => (
+          <motion.div
+            key={index}
+            className={`faq-item ${activeIndex === index ? 'active' : ''}`}
+            onClick={() => toggleFAQ(index)}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+          >
+            <div className="faq-category">
+              <span>{faq.category}</span>
+              <motion.div
+                className="icon-wrapper"
+                animate={{ rotate: activeIndex === index ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <FaChevronDown />
+              </motion.div>
             </div>
-          )}
-        </div>
-      ))}
-    </section>
-  );
-};
-
-export default FAQSection;
+            <AnimatePresence>
+              {activeIndex === index && (
+                <motion.div
+                  className="faq-questions"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {faq.questions.map((q, i) => (
+                    <motion.div
+                      key={i}
+                      className="faq-question-answer"
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.1 }}
+                    >
+                      <div className="faq-question">{q.question}</div>
+                      <div className="faq-answer">{q.answer}</div>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        ))}
+      </section>
+    );
+  };
+  
+  export default FAQSection;

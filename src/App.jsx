@@ -1,5 +1,6 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
 import PopularDestinations from './components/PopularDestination/PopularDestinations';
 import FAQSection from './components/FAQSection/FAQSection';
 import Footer from './components/Footer/Footer';
@@ -15,34 +16,38 @@ import MijnFavorieten from './pages/favoritesPage/MijnFavorieten';
 import Login from './pages/loginPage/Login';
 import SignUp from './pages/signUpPage/SignUp';
 import Account from './pages/accountPage/Account';
-import GeneralInfo from './pages/generalInfoPage/GeneralInfo';
-import ProtectedRoute from './components/ProtectedRoute';
+import AlgemeneInfo from './pages/algemeneInfoPage/AlgemenInfo';
+import Privacy from './pages/privacyPage/Privacy';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
 function App() {
   return (
     <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={
-          <>
-            <ImageSection />
-            <Statistics />
-            <AboutUs />
-            <PopularDestinations />
-            <FAQSection />
-          </>
-        } />
-        <Route path="/bestemmingen" element={<ProtectedRoute element={Bestemmingen} />} />
-        <Route path="/city/:cityName" element={<ProtectedRoute element={CityDetail} />} />
-        <Route path="/keuzehulp" element={<ProtectedRoute element={Keuzehulp} />} />
-        <Route path="/reis-check" element={<ProtectedRoute element={ReisCheck} />} />
-        <Route path="/mijn-favorieten" element={<ProtectedRoute element={MijnFavorieten} />} />
-        <Route path="/mijn-account" element={<Login />} />
-        <Route path="/registreren" element={<SignUp />} />
-        <Route path="/account" element={<ProtectedRoute element={Account} />} />
-        <Route path="/algemene-informatie" element={<GeneralInfo />} />
-      </Routes>
-      <Footer />
+      <AuthProvider>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={
+            <>
+              <ImageSection />
+              <Statistics />
+              <AboutUs />
+              <PopularDestinations />
+              <FAQSection />
+            </>
+          } />
+          <Route path="/bestemmingen" element={<ProtectedRoute element={Bestemmingen} />} />
+          <Route path="/city/:cityName" element={<ProtectedRoute element={CityDetail} />} />
+          <Route path="/keuzehulp" element={<ProtectedRoute element={Keuzehulp} />} />
+          <Route path="/reis-check" element={<ProtectedRoute element={ReisCheck} />} />
+          <Route path="/mijn-favorieten" element={<ProtectedRoute element={MijnFavorieten} />} />
+          <Route path="/mijn-account" element={<Login />} />
+          <Route path="/registreren" element={<SignUp />} />
+          <Route path="/account" element={<ProtectedRoute element={Account} />} />
+          <Route path="/algemene-informatie" element={<AlgemeneInfo />} />
+          <Route path="/privacybeleid" element={<Privacy />} />
+        </Routes>
+        <Footer />
+      </AuthProvider>
     </Router>
   );
 }
