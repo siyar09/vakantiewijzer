@@ -94,7 +94,7 @@ const CityActivities = ({ city }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <h2>Top Activiteiten</h2>
+      <h2>Top activiteiten</h2>
       <AnimatePresence mode="wait">
         {loading ? (
           <motion.div

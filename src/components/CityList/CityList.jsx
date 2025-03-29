@@ -1,6 +1,7 @@
 import React from 'react';
 import './CityList.css';
 import CityCard from '../CityCard/CityCard';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 const CityList = ({ cityData, showDetails, showDescriptionOnly }) => (
   <ul className='city-list'>
@@ -11,7 +12,7 @@ const CityList = ({ cityData, showDetails, showDescriptionOnly }) => (
         </li>
       ))
     ) : (
-      <p>Geen data beschikbaar of de data wordt nog geladen...</p>
+      <LoadingSpinner />
     )}
   </ul>
 );
