@@ -13,7 +13,7 @@ VakantieWijzer is een interactieve webapplicatie die je helpt bij het vinden van
 - **Top Activiteiten**: Aanbevolen activiteiten voor elke bestemming
 
 ## 2. Screenshot
-![VakantieWijzer Screenshot](/public/screenshot.png)
+![VakantieWijzer Screenshot](./public/home-page-new.jpg)
 
 ## 3. Benodigdheden
 - Node.js (versie 14.0.0 of hoger)
