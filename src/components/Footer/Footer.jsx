@@ -7,6 +7,10 @@ import './Footer.css';
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
+  const handleLinkClick = () => {
+    window.scrollTo(0, 0);
+  };
+  
   return (
     <footer className="footer">
       <div className="footer-content">
@@ -27,13 +31,19 @@ const Footer = () => {
           <h3>Links</h3>
           <div className="footer-links">
             <motion.div whileHover={{ x: 5 }}>
-              <Link to="/algemene-informatie">Algemene Informatie</Link>
+              <Link to="/algemene-informatie" onClick={handleLinkClick}>
+                Algemene Informatie
+              </Link>
             </motion.div>
             <motion.div whileHover={{ x: 5 }}>
-              <Link to="/privacybeleid">Privacybeleid</Link>
+              <Link to="/privacybeleid" onClick={handleLinkClick}>
+                Privacybeleid
+              </Link>
             </motion.div>
             <motion.div whileHover={{ x: 5 }}>
-              <Link to="/bestemmingen">Bestemmingen</Link>
+              <Link to="/bestemmingen" onClick={handleLinkClick}>
+                Bestemmingen
+              </Link>
             </motion.div>
           </div>
         </div>
