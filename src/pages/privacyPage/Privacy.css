@@ -103,6 +103,7 @@
   
 .contact-button:hover {
   background: #1a472a;
+  color: #ffffff;
 }
   
 @media (max-width: 768px) {

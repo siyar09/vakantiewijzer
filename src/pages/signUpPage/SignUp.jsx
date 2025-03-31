@@ -89,7 +89,7 @@ const SignUp = () => {
           setTimeout(() => {
             setShowSuccessPopup(false);
             navigate('/mijn-account');
-          }, 2000);
+          }, 1000);
         }
       }
     } catch (error) {

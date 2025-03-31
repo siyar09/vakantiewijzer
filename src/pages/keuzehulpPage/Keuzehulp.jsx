@@ -8,7 +8,7 @@ import ProgressBar from '../../components/ProgressBar/ProgressBar.jsx';
 import Recommendation from '../../components/Recommendation/Recommendation.jsx';
 import questions from '../../data/Questions.js';
 import { fetchExchangeRate, calculatePriceDifference } from '../../components/BudgetCategory/BudgetCategory';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 
 const Keuzehulp = () => {
@@ -81,7 +81,7 @@ const Keuzehulp = () => {
 
       const recommendations = await Promise.all(recommendationsPromises);
       recommendations.sort((a, b) => b.score - a.score);
-      return recommendations.slice(0, 5);
+      return recommendations.slice(0, 3);
     } catch (error) {
       console.error('Error calculating recommendations:', error);
       return [];
