@@ -40,7 +40,19 @@ npm install
 ```
 
 ### Stap 3: Configuratie
-Maak een `.env` bestand aan in de root map met de volgende inhoud:
+
+#### Voor beoordelaars
+Voor testdoeleinden staan de API keys in de `.env` beschikbaar voor de beoordelaars. 
+
+#### Voor overige gebruikers
+1. Maak een `.env` bestand aan in de root van het project
+2. Vraag API keys aan bij de volgende services:
+   - [OpenWeather](https://openweathermap.org/api)
+   - [Yelp Fusion](https://www.yelp.com/developers)
+   - [Pixabay](https://pixabay.com/api/docs/)
+   - [Spoonacular](https://spoonacular.com/food-api)
+   - [OpenTripMap](https://dev.opentripmap.org/product)
+3. Vul het `.env` bestand met je eigen API keys:
 ```env
 VITE_APP_WEATHER_API_KEY=jouw_openweather_api_key
 VITE_APP_YELP_API_KEY=jouw_yelp_api_key
@@ -55,10 +67,12 @@ npm run dev
 ```
 
 ## 5. Overige commando's
-- Build voor productie: `npm run build`
-- Preview productie build: `npm run preview`
-- Linting: `npm run lint`
-- Tests uitvoeren: `npm run test`
+- `npm run build`: Bouwt de applicatie voor productie
+- `npm run preview`: Start een lokale server om de productie build te testen
+- `npm run lint`: Voert ESLint uit voor code kwaliteitscontrole
+- `npm run test`: Start de test suite
+- `npm run format`: Formatteert de code volgens Prettier regels
+
 
 ## Browser Ondersteuning 🌐
 - Chrome (laatste versie)
