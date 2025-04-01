@@ -3,14 +3,23 @@
 ## 1. Inleiding
 VakantieWijzer is een interactieve webapplicatie die je helpt bij het vinden van je ideale vakantiebestemming. Door middel van een keuzehulp, uitgebreide zoekfunctie en persoonlijke voorkeuren krijg je gepersonaliseerde reisaanbevelingen.
 
+### Toegankelijkheid & Authenticatie
+- De homepagina is toegankelijk voor alle bezoekers
+- Overige pagina's zijn alleen toegankelijk voor ingelogde gebruikers
+- Account vereisten:
+  - **Gebruikersnaam**: minimaal 6 karakters
+  - **Wachtwoord**: minimaal 8 karakters, waarvan:
+    - Minimaal 1 hoofdletter
+    - Minimaal 1 cijfer
+
 ### Belangrijkste functionaliteiten:
 - **Keuzehulp**: Ontdek je perfecte bestemming via een korte vragenlijst
-- **Bestemmingen Verkennen**: Zoek en filter door verschillende vakantiebestemmingen
-- **Persoonlijk Account**: Sla je favoriete bestemmingen op
-- **Reis Checklist**: Handige paklijsten voor verschillende type reizen
-- **Real-time Weer Info**: Actuele weersinformatie van bestemmingen
-- **Lokale Gerechten**: Recepten en food informatie via Spoonacular
-- **Top Activiteiten**: Aanbevolen activiteiten voor elke bestemming
+- **Bestemmingen verkennen**: Zoek en filter door verschillende vakantiebestemmingen
+- **Persoonlijk account**: Sla je favoriete bestemmingen op
+- **Reis checklist**: Handige paklijsten voor verschillende type reizen
+- **Real-time weer info**: Actuele weersinformatie van bestemmingen
+- **Lokale gerechten**: Lokale gerechten voor elke bestemming
+- **Top activiteiten**: Aanbevolen activiteiten voor elke bestemming
 
 ## 2. Screenshot
 ![VakantieWijzer Screenshot](./public/home-page-new.jpg)
@@ -25,6 +34,7 @@ VakantieWijzer is een interactieve webapplicatie die je helpt bij het vinden van
   - Pixabay
   - Spoonacular
   - OpenTripMap
+  - OpenCage
 
 ## 4. De applicatie draaien
 
@@ -52,6 +62,7 @@ Voor testdoeleinden staan de API keys in de `.env` beschikbaar voor de beoordela
    - [Pixabay](https://pixabay.com/api/docs/)
    - [Spoonacular](https://spoonacular.com/food-api)
    - [OpenTripMap](https://dev.opentripmap.org/product)
+   - [OpenCage](https://opencagedata.com/api)
 3. Vul het `.env` bestand met je eigen API keys:
 ```env
 VITE_APP_WEATHER_API_KEY=jouw_openweather_api_key
@@ -59,6 +70,7 @@ VITE_APP_YELP_API_KEY=jouw_yelp_api_key
 VITE_APP_PIXABAY_API_KEY=jouw_pixabay_api_key
 VITE_APP_SPOONACULAR_API_KEY=jouw_spoonacular_api_key
 VITE_APP_OPENTRIP_API_KEY=jouw_opentrip_api_key
+VITE_APP_OPENCAGE_API_KEY=jouw_opencage_api_key
 ```
 
 ### Stap 4: Applicatie starten

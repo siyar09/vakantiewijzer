@@ -1,10 +1,15 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion'; 
+import { motion } from 'framer-motion';
 import './ImageSection.css';
 
 const ImageSection = () => {
   const navigate = useNavigate();
+
+  const handleNavigation = (path) => {
+    window.scrollTo(0, 0);
+    navigate(path);
+  };
 
   return (
     <section className="hero-section">
@@ -20,7 +25,7 @@ const ImageSection = () => {
           <div className="hero-buttons">
             <motion.button 
               className="primary-button"
-              onClick={() => navigate('/keuzehulp')}
+              onClick={() => handleNavigation('/keuzehulp')}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -28,7 +33,7 @@ const ImageSection = () => {
             </motion.button>
             <motion.button 
               className="secondary-button"
-              onClick={() => navigate('/bestemmingen')}
+              onClick={() => handleNavigation('/bestemmingen')}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
