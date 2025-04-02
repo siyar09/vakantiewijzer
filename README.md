@@ -27,7 +27,7 @@ VakantieWijzer is een interactieve webapplicatie die je helpt bij het vinden van
   - **Wachtwoord**: minimaal 8 karakters, waarvan:
     - Minimaal 1 hoofdletter
     - Minimaal 1 cijfer
-    - Akkoord gaan met de algemene voorwaarden
+  - **Akkoord gaan met de algemene voorwaarden**
 
 ### Belangrijkste functionaliteiten
 - **Keuzehulp**: Ontdek je perfecte bestemming via een korte vragenlijst
