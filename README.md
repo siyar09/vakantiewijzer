@@ -1,5 +1,21 @@
 # VakantieWijzer 🌍✈️
 
+## Inhoudsopgave
+- [1. Inleiding](#1-inleiding)
+  - [Toegankelijkheid & Authenticatie](#toegankelijkheid--authenticatie)
+  - [Belangrijkste functionaliteiten](#belangrijkste-functionaliteiten)
+- [2. Screenshot](#2-screenshot)
+- [3. Benodigdheden](#3-benodigdheden)
+- [4. De applicatie draaien](#4-de-applicatie-draaien)
+  - [Stap 1: Repository klonen](#stap-1-repository-klonen)
+  - [Stap 2: Dependencies installeren](#stap-2-dependencies-installeren)
+  - [Stap 3: Configuratie](#stap-3-configuratie)
+  - [Stap 4: Applicatie starten](#stap-4-applicatie-starten)
+- [5. Overige commando's](#5-overige-commandos)
+- [6. Browser Ondersteuning](#6-browser-ondersteuning)
+- [7. Contact](#7-contact)
+- [8. Licentie](#8-licentie)
+
 ## 1. Inleiding
 VakantieWijzer is een interactieve webapplicatie die je helpt bij het vinden van je ideale vakantiebestemming. Door middel van een keuzehulp, uitgebreide zoekfunctie en persoonlijke voorkeuren krijg je gepersonaliseerde reisaanbevelingen.
 
@@ -13,7 +29,7 @@ VakantieWijzer is een interactieve webapplicatie die je helpt bij het vinden van
     - Minimaal 1 cijfer
     - Akkoord gaan met de algemene voorwaarden
 
-### Belangrijkste functionaliteiten:
+### Belangrijkste functionaliteiten
 - **Keuzehulp**: Ontdek je perfecte bestemming via een korte vragenlijst
 - **Bestemmingen verkennen**: Zoek en filter door verschillende vakantiebestemmingen
 - **Persoonlijk account**: Sla je favoriete bestemmingen op
@@ -26,16 +42,21 @@ VakantieWijzer is een interactieve webapplicatie die je helpt bij het vinden van
 ![VakantieWijzer Screenshot](./public/home-page-new.jpg)
 
 ## 3. Benodigdheden
-- Node.js (versie 14.0.0 of hoger)
-- npm (versie 6.0.0 of hoger)
-- Git
-- API keys voor:
-  - OpenWeather
-  - Yelp Fusion
-  - Pixabay
-  - Spoonacular
-  - OpenTripMap
-  - OpenCage
+| Software | Minimale versie |
+|----------|-----------------|
+| Node.js  | 14.0.0         |
+| npm      | 6.0.0          |
+| Git      | Laatste versie |
+
+### Vereiste API keys
+| API         | Doel                    |
+|-------------|------------------------|
+| OpenWeather | Weersinformatie       |
+| Yelp Fusion | Activiteiten          |
+| Pixabay     | Afbeeldingen          |
+| Spoonacular | Lokale gerechten      |
+| OpenTripMap | Bezienswaardigheden   |
+| OpenCage    | Geolocatie            |
 
 ## 4. De applicatie draaien
 
@@ -53,7 +74,7 @@ npm install
 ### Stap 3: Configuratie
 
 #### Voor beoordelaars
-Voor testdoeleinden staan de API keys in de `.env` beschikbaar voor de beoordelaars. 
+Voor testdoeleinden staan de API keys in de `.env` beschikbaar voor de beoordelaars.
 
 #### Voor overige gebruikers
 1. Maak een `.env` bestand aan in de root van het project
@@ -64,6 +85,7 @@ Voor testdoeleinden staan de API keys in de `.env` beschikbaar voor de beoordela
    - [Spoonacular](https://spoonacular.com/food-api)
    - [OpenTripMap](https://dev.opentripmap.org/product)
    - [OpenCage](https://opencagedata.com/api)
+
 3. Vul het `.env` bestand met je eigen API keys:
 ```env
 VITE_APP_WEATHER_API_KEY=jouw_openweather_api_key
@@ -80,22 +102,23 @@ npm run dev
 ```
 
 ## 5. Overige commando's
-- `npm run build`: Bouwt de applicatie voor productie
-- `npm run preview`: Start een lokale server om de productie build te testen
-- `npm run lint`: Voert ESLint uit voor code kwaliteitscontrole
-- `npm run test`: Start de test suite
-- `npm run format`: Formatteert de code volgens Prettier regels
+| Commando | Beschrijving |
+|----------|-------------|
+| `npm run build` | Bouwt de applicatie voor productie |
+| `npm run preview` | Start lokale server voor productie build |
+| `npm run lint` | Voert ESLint uit voor code kwaliteit |
+| `npm run test` | Start de test suite |
+| `npm run format` | Formatteert code volgens Prettier |
 
+## 6. Browser Ondersteuning
+✅ Chrome (laatste versie)  
+✅ Firefox (laatste versie)  
+✅ Safari (laatste versie)  
+✅ Edge (laatste versie)
 
-## Browser Ondersteuning 🌐
-- Chrome (laatste versie)
-- Firefox (laatste versie)
-- Safari (laatste versie)
-- Edge (laatste versie)
+## 7. Contact
+📧 Email: info@vakantiewijzer.nl  
+🌐 Website: [www.vakantiewijzer.nl](https://www.vakantiewijzer.nl)
 
-## Contact 📧
-- Email: info@vakantiewijzer.nl
-- Website: [www.vakantiewijzer.nl](https://www.vakantiewijzer.nl)
-
-## Licentie 📄
-Dit project is gelicentieerd onder de MIT License.
+## 8. Licentie
+Dit project is gelicentieerd onder de [MIT License](LICENSE).
