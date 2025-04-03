@@ -86,9 +86,10 @@ const SignUp = () => {
         if (loginResponse.data.accessToken) {
           login(loginResponse.data.accessToken);
           setShowSuccessPopup(true);
+          window.scrollTo(0, 0);
           setTimeout(() => {
             setShowSuccessPopup(false);
-            navigate('/mijn-account');
+            navigate('/');
           }, 1000);
         }
       }
