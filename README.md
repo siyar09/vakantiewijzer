@@ -77,7 +77,7 @@ npm install
 Voor testdoeleinden staan de API keys in de `.env` beschikbaar voor de beoordelaars.
 
 #### Voor overige gebruikers
-1. Maak een `.env` bestand aan in de root van het project
+1. Maak een `.env` bestand aan in de root map (op dezelfde hoogte als de .gitignore en package.json).
 2. Vraag API keys aan bij de volgende services:
    - [OpenWeather](https://openweathermap.org/api)
    - [Yelp Fusion](https://www.yelp.com/developers)
