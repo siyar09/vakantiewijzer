@@ -28,7 +28,7 @@ const destinations = [
 ];
 
 const PopularDestinations = () => {
-  const navigate = useNavigate();  // Voeg deze hook toe bovenaan de component
+  const navigate = useNavigate();  
 
   const handleExploreClick = (destination) => {
     window.scrollTo(0, 0);

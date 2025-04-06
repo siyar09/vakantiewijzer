@@ -53,6 +53,7 @@ const SignUp = () => {
   
 
   const handleSubmit = async (e) => {
+    window.scrollTo(0, 0);
     e.preventDefault();
   
     const error = validateForm();
@@ -262,6 +263,7 @@ const SignUp = () => {
           <motion.button
             type="submit"
             className="signup-button"
+            onClick={handleSubmit}
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.8 }}
@@ -273,6 +275,7 @@ const SignUp = () => {
 
           <motion.p 
             className="login-link"
+            onClick={handleSubmit}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.9 }}
