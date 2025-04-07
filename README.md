@@ -13,8 +13,7 @@
   - [Stap 4: Applicatie starten](#stap-4-applicatie-starten)
 - [5. Overige commando's](#5-overige-commandos)
 - [6. Browser Ondersteuning](#6-browser-ondersteuning)
-- [7. Contact](#7-contact)
-- [8. Licentie](#8-licentie)
+- [7. Doeleinden](#7-doeleinden)
 
 ## 1. Inleiding
 VakantieWijzer is een interactieve webapplicatie die je helpt bij het vinden van je ideale vakantiebestemming. Door middel van een keuzehulp, uitgebreide zoekfunctie en persoonlijke voorkeuren krijg je gepersonaliseerde reisaanbevelingen.
@@ -116,9 +115,6 @@ npm run dev
 ✅ Safari (laatste versie)  
 ✅ Edge (laatste versie)
 
-## 7. Contact
-📧 Email: info@vakantiewijzer.nl  
-🌐 Website: [www.vakantiewijzer.nl](https://www.vakantiewijzer.nl)
+## 7. Doeleinden
+De applicatie is alleen bedoeld als schoolproject en is niet bedoeld voor gebruik in de echte wereld.
 
-## 8. Licentie
-Dit project is gelicentieerd onder de [MIT License](LICENSE).
