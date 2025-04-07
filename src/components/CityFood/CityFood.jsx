@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 const CityFood = ({ city, nationality }) => {
   const [food, setFood] = useState([]);
@@ -54,10 +55,12 @@ const CityFood = ({ city, nationality }) => {
           ))}
         </ul>
       ) : (
-        <p>Laden van eten & drinken...</p>
+        <div>
+          <p>Laden van eten & drinken...</p>
+          <LoadingSpinner />
+        </div>
       )}
     </div>
   );
 };
-
 export default CityFood;

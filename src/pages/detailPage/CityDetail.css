@@ -81,6 +81,12 @@
     padding: 15px;
 }
   
+.city-food hr {
+    border: 0;
+    height: 1px;
+    background: black;
+}
+
 .city-food ul {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));

@@ -1,16 +1,12 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
-import PopularDestinations from './components/PopularDestination/PopularDestinations';
-import FAQSection from './components/FAQSection/FAQSection';
 import Footer from './components/Footer/Footer';
 import Navbar from './components/Navbar/Navbar';
+import Home from './pages/homePage/Home';
 import Bestemmingen from './pages/bestemmingenPage/Bestemmingen';
 import CityDetail from './pages/detailPage/CityDetail';
 import Keuzehulp from './pages/keuzehulpPage/Keuzehulp';
-import Statistics from './components/Statistics/Statistics';
-import AboutUs from './components/AboutUs/AboutUs';
-import ImageSection from './components/ImageSection/ImageSection';
 import ReisCheck from './pages/reisCheckPage/ReisCheck';
 import MijnFavorieten from './pages/favoritesPage/MijnFavorieten';
 import Login from './pages/loginPage/Login';
@@ -28,15 +24,7 @@ function App() {
       <AuthProvider>
         <Navbar />
         <Routes>
-          <Route path="/" element={
-            <>
-              <ImageSection />
-              <Statistics />
-              <AboutUs />
-              <PopularDestinations />
-              <FAQSection />
-            </>
-          } />
+          <Route path="/" element={<Home />} />
           <Route path="/bestemmingen" element={<ProtectedRoute element={Bestemmingen} />} />
           <Route path="/city/:cityName" element={<ProtectedRoute element={CityDetail} />} />
           <Route path="/keuzehulp" element={<ProtectedRoute element={Keuzehulp} />} />

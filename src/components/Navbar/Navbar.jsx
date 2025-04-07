@@ -28,6 +28,7 @@ const Navbar = () => {
   }, [location.pathname]);
 
   const handleLogout = () => {
+    window.scrollTo(0, 0);
     logout();
     setDropdownVisible(false);
   };
@@ -90,7 +91,7 @@ const Navbar = () => {
               >
                 {isAuthenticated ? (
                   <>
-                    <motion.div whileHover={{ x: 5 }}>
+                    <motion.div whileHover={{ x: 5 }} onClick={() => window.scrollTo(0, 0)}>
                       <NavLink to="/account">Accountoverzicht</NavLink>
                     </motion.div>
                     <motion.button 
@@ -101,7 +102,7 @@ const Navbar = () => {
                     </motion.button>
                   </>
                 ) : (
-                  <motion.div whileHover={{ x: 5 }}>
+                  <motion.div whileHover={{ x: 5 }} onClick={() => window.scrollTo(0, 0)}>
                     <NavLink to="/mijn-account">Inloggen</NavLink>
                   </motion.div>
                 )}

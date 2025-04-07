@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaUser, FaLock } from 'react-icons/fa';
@@ -20,7 +20,9 @@ const Login = () => {
   const { login } = useAuth();
 
   const handleSubmit = async (e) => {
+    window.scrollTo(0, 0);
     e.preventDefault();
+
 
     if (!username || !password) {
       setErrorMessage('Vul zowel een gebruikersnaam als een wachtwoord in.');
@@ -77,7 +79,7 @@ const Login = () => {
           transition={{ duration: 0.6 }}
         >
           <h2>Welkom!</h2>
-          <p>Log in om je reis voorkeuren op te slaan</p>
+          <p>Log in en ontdek bestemmingen die perfect bij je passen</p>
         </motion.div>
 
         <form onSubmit={handleSubmit}>
@@ -124,6 +126,7 @@ const Login = () => {
           <motion.button
             type="submit"
             className="login-button"
+            onClick={handleSubmit}
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -136,6 +139,7 @@ const Login = () => {
 
         <motion.p 
           className="register-link"
+          onClick={handleSubmit}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.5 }}

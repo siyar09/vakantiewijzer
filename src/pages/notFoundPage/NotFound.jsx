@@ -7,6 +7,11 @@ import './NotFound.css';
 const NotFound = () => {
   const navigate = useNavigate();
 
+  const handleNavigation = (path) => {
+    window.scrollTo(0, 0);
+    navigate(path);
+  };
+
   return (
     <motion.div 
       className="not-found-container"
@@ -26,7 +31,7 @@ const NotFound = () => {
         
         <motion.button
           className="home-button"
-          onClick={() => navigate('/')}
+          onClick={() => handleNavigation('/')}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >

@@ -49,6 +49,7 @@ const MijnFavorieten = () => {
   };
 
   const handleAddFavoriteClick = () => {
+    window.scrollTo(0, 0);
     navigate('/bestemmingen');
   };
 

@@ -39,7 +39,7 @@ const questions = [
       ]
     },
     {
-      question: "Wil je een actieve vakantie?",
+      question: "Heb je zin in een vakantie waar je veel onderneemt en actief bezig bent in de natuur of stad?",
       answers: [
         "Ja",
         "Nee"
