@@ -49,13 +49,13 @@ VakantieWijzer is een interactieve webapplicatie die je helpt bij het vinden van
 | Git      | Laatste versie |
 
 ### Vereiste API keys
-| API         | Doel                    |
+| API         | Doel                   |
 |-------------|------------------------|
 | OpenWeather | Weersinformatie       |
-| Yelp Fusion | Activiteiten          |
+| Yelp Fusion | Reviews               |
 | Pixabay     | Afbeeldingen          |
 | Spoonacular | Lokale gerechten      |
-| OpenTripMap | Bezienswaardigheden   |
+| OpenTripMap | Activiteiten          |
 | OpenCage    | Geolocatie            |
 
 ## 4. De applicatie draaien
