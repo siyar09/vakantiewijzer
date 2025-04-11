@@ -20,8 +20,8 @@ const Statistics = () => {
     },
     {
       icon: <FaGlobeEurope />,
-      value: 30,
-      label: "Meer dan 30+ landen beschikbaar",
+      value: 35,
+      label: "Meer dan 35+ landen beschikbaar",
       suffix: "+",
       key: "countries"
     },
