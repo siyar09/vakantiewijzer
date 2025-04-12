@@ -61,7 +61,7 @@ VakantieWijzer is een interactieve webapplicatie die je helpt bij het vinden van
 
 ### Stap 1: Repository klonen
 ```bash
-git clone https://github.com/jouw-username/vakantiewijzer.git
+git clone https://github.com/siyar09/vakantiewijzer.git
 cd vakantiewijzer
 ```
 
