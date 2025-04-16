@@ -17,7 +17,6 @@ const CityInfo = ({ city, country, budget }) => {
   const [climate, setClimate] = useState('');
   const [currency, setCurrency] = useState('');
   const [description, setDescription] = useState('');
-  const [flag, setFlag] = useState('');
   const [countryName, setCountryName] = useState('');
   const [temperature, setTemperature] = useState(null);
 
@@ -27,7 +26,7 @@ const CityInfo = ({ city, country, budget }) => {
       try {
         const countryResponse = await axios.get(`https://restcountries.com/v3.1/name/${country}`, {
           params: {
-            fields: 'languages,currencies,flags'
+            fields: 'languages,currencies'
           }
         });
         if (countryResponse.data && countryResponse.data.length > 0) {
@@ -40,10 +39,8 @@ const CityInfo = ({ city, country, budget }) => {
             const currencyCode = Object.keys(countryData.currencies)[0];
             setCurrency(currencyCode);
           }
-          if (countryData.flags) {
-            setFlag(countryData.flags.png);
-          }
         }
+      
       } catch (error) {
         console.error('Fout bij ophalen land data:', error);
         const countryInfo = countries.find(c => c.city === city);
