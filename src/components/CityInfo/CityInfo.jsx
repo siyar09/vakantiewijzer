@@ -24,36 +24,16 @@ const CityInfo = ({ city, country, budget }) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      // Land data ophalen
+      let countryData = null;
       try {
-        const [countryResponse, weatherResponse, descriptionResponse] = await Promise.all([
-          axios.get(`https://restcountries.com/v3.1/name/${country}`, {
-            params: {
-              fields: 'languages,currencies,flags'
-            }
-          }),
-          axios.get('https://api.openweathermap.org/data/2.5/weather', {
-            params: {
-              q: city,
-              appid: WEATHER_API_KEY,
-              units: 'metric',
-              lang: 'nl'
-            }
-          }),
-          axios.get('https://en.wikivoyage.org/w/api.php', {
-            params: {
-              action: 'query',
-              prop: 'extracts',
-              exintro: true,
-              titles: city,
-              format: 'json',
-              origin: '*'
-            }
-          })
-        ]);
-
-        // Handle country data
+        const countryResponse = await axios.get(`https://restcountries.com/v3.1/name/${country}`, {
+          params: {
+            fields: 'languages,currencies,flags'
+          }
+        });
         if (countryResponse.data && countryResponse.data.length > 0) {
-          const countryData = countryResponse.data[0];
+          countryData = countryResponse.data[0];
           if (countryData.languages) {
             const languages = Object.values(countryData.languages).join(', ');
             setLanguage(languages);
@@ -66,29 +46,62 @@ const CityInfo = ({ city, country, budget }) => {
             setFlag(countryData.flags.png);
           }
         }
+      } catch (error) {
+        console.error('Fout bij ophalen land data:', error);
+        // Eerst kijken of we de valuta kunnen vinden in ons Countries bestand
+        const countryInfo = countries.find(c => c.city === city);
+        if (countryInfo?.currencyCode) {
+          setCurrency(countryInfo.currencyCode);
+        } else {
+          setCurrency('Onbekend');
+        }
+        setLanguage('Onbekend');
+      }
 
-        // Handle weather data
+      // Weer data ophalen (onafhankelijk van land data)
+      try {
+        const weatherResponse = await axios.get('https://api.openweathermap.org/data/2.5/weather', {
+          params: {
+            q: `${city},${country}`,
+            appid: WEATHER_API_KEY,
+            units: 'metric',
+            lang: 'nl'
+          }
+        });
         const weatherData = weatherResponse.data;
-        if (weatherData && weatherData.weather && weatherData.weather.length > 0) {
+        if (weatherData?.weather?.[0]) {
           setClimate(capitalizeFirstLetter(weatherData.weather[0].description));
           setTemperature(Math.round(weatherData.main.temp));
         }
+      } catch (error) {
+        console.error('Fout bij ophalen weer data:', error);
+        setClimate('Onbekend');
+        setTemperature(null);
+      }
 
-        // Handle description data
-        const descriptionData = descriptionResponse.data;
-        const page = descriptionData.query.pages[Object.keys(descriptionData.query.pages)[0]];
-        if (page && page.extract) {
+      // Beschrijving ophalen (onafhankelijk van andere data)
+      try {
+        const descriptionResponse = await axios.get('https://en.wikivoyage.org/w/api.php', {
+          params: {
+            action: 'query',
+            prop: 'extracts',
+            exintro: true,
+            titles: city,
+            format: 'json',
+            origin: '*'
+          }
+        });
+        const page = descriptionResponse.data.query.pages[Object.keys(descriptionResponse.data.query.pages)[0]];
+        if (page?.extract) {
           const shortDescription = page.extract.substring(0, 500);
           const cleanDescription = shortDescription.replace(/<\/?[^>]+(>|$)/g, "");
           setDescription(cleanDescription);
         } else {
-          const fallbackDescription = descriptions[city] || 'Geen beschrijving beschikbaar.';
-          setDescription(fallbackDescription);
+          setDescription(descriptions[city] || 'Geen beschrijving beschikbaar.');
         }
       } catch (error) {
-        console.error('Fout bij ophalen data:', error);
-        const fallbackDescription = descriptions[city] || 'Geen beschrijving beschikbaar.';
-        setDescription(fallbackDescription);
+        console.error('Fout bij ophalen beschrijving:', error);
+        setDescription(descriptions[city] || 'Geen beschrijving beschikbaar.');
       }
     };
 
@@ -112,7 +125,7 @@ const CityInfo = ({ city, country, budget }) => {
       <BudgetCategory budget={budget} />
       <p><strong>Taal:</strong> {language || 'Laden...'}</p>
       <p><strong>Munteenheid:</strong> {currency}</p>
-      <CityReviews city={city} />
+      {/* <CityReviews city={city} /> */}
     </div>
   );
 };
