@@ -110,13 +110,13 @@ const CityInfo = ({ city, country, budget }) => {
       <h2>Algemene informatie</h2>
       <hr />
       <p><strong>Beschrijving:</strong> {description}...</p>
-      <p><strong>Locatie:</strong> {countryName}</p>
-      <CityWeather city={city} />
+      <p><strong>Locatie:</strong> {countryName || 'Laden...'}</p>
+      <CityWeather city={city || 'Laden...'} />
       <p><strong>Weertype:</strong> {climate || 'Laden...'}</p>
-      <BestTravelTime temperature={temperature} />      
-      <BudgetCategory budget={budget} />
+      <BestTravelTime temperature={temperature || 'Laden...'} />      
+      <BudgetCategory budget={budget || 'Laden...'} />
       <p><strong>Taal:</strong> {language || 'Laden...'}</p>
-      <p><strong>Munteenheid:</strong> {currency}</p>
+      <p><strong>Munteenheid:</strong> {currency || 'Laden...'}</p>
     </div>
   );
 };
