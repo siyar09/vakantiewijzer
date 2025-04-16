@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import CityWeather from '../CityWeather/CityWeather';
-import CityReviews from '../CityReviews/CityReviews';
 import BestTravelTime from '../BestTravelTime/BestTravelTime';
 import BudgetCategory from '../BudgetCategory/BudgetCategory';
 import descriptions from '../../data/descriptions.json';
@@ -24,7 +23,6 @@ const CityInfo = ({ city, country, budget }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      // Land data ophalen
       let countryData = null;
       try {
         const countryResponse = await axios.get(`https://restcountries.com/v3.1/name/${country}`, {
@@ -48,7 +46,6 @@ const CityInfo = ({ city, country, budget }) => {
         }
       } catch (error) {
         console.error('Fout bij ophalen land data:', error);
-        // Eerst kijken of we de valuta kunnen vinden in ons Countries bestand
         const countryInfo = countries.find(c => c.city === city);
         if (countryInfo?.currencyCode) {
           setCurrency(countryInfo.currencyCode);
@@ -58,7 +55,6 @@ const CityInfo = ({ city, country, budget }) => {
         setLanguage('Onbekend');
       }
 
-      // Weer data ophalen (onafhankelijk van land data)
       try {
         const weatherResponse = await axios.get('https://api.openweathermap.org/data/2.5/weather', {
           params: {
@@ -79,7 +75,6 @@ const CityInfo = ({ city, country, budget }) => {
         setTemperature(null);
       }
 
-      // Beschrijving ophalen (onafhankelijk van andere data)
       try {
         const descriptionResponse = await axios.get('https://en.wikivoyage.org/w/api.php', {
           params: {
@@ -125,7 +120,6 @@ const CityInfo = ({ city, country, budget }) => {
       <BudgetCategory budget={budget} />
       <p><strong>Taal:</strong> {language || 'Laden...'}</p>
       <p><strong>Munteenheid:</strong> {currency}</p>
-      {/* <CityReviews city={city} /> */}
     </div>
   );
 };
