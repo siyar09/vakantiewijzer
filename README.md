@@ -51,7 +51,6 @@ VakantieWijzer is een interactieve webapplicatie die je helpt bij het vinden van
 | API         | Doel                   |
 |-------------|------------------------|
 | OpenWeather | Weersinformatie       |
-| Yelp Fusion | Reviews               |
 | Pixabay     | Afbeeldingen          |
 | Spoonacular | Lokale gerechten      |
 | OpenTripMap | Activiteiten          |
@@ -79,7 +78,6 @@ Voor testdoeleinden staan de API keys in de `.env` beschikbaar voor de beoordela
 1. Maak een `.env` bestand aan in de root map (op dezelfde hoogte als de .gitignore en package.json).
 2. Vraag API keys aan bij de volgende services:
    - [OpenWeather](https://openweathermap.org/api)
-   - [Yelp Fusion](https://www.yelp.com/developers)
    - [Pixabay](https://pixabay.com/api/docs/)
    - [Spoonacular](https://spoonacular.com/food-api)
    - [OpenTripMap](https://dev.opentripmap.org/product)
@@ -88,7 +86,6 @@ Voor testdoeleinden staan de API keys in de `.env` beschikbaar voor de beoordela
 3. Vul het `.env` bestand met je eigen API keys:
 ```env
 VITE_APP_WEATHER_API_KEY=jouw_openweather_api_key
-VITE_APP_YELP_API_KEY=jouw_yelp_api_key
 VITE_APP_PIXABAY_API_KEY=jouw_pixabay_api_key
 VITE_APP_SPOONACULAR_API_KEY=jouw_spoonacular_api_key
 VITE_APP_OPENTRIP_API_KEY=jouw_opentrip_api_key
