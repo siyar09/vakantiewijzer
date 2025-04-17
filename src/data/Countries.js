@@ -32,12 +32,7 @@ const countries = [
   { city: 'Prague', country: 'Czech Republic', countryNL: 'Tsjechie', countryCode: 'CZ', currencyCode: 'CZK', nationality: 'Eastern European', locationType: 'Binnen Europa', hasBeach: false, isBusy: false, active: true, temperature: 'Gematigd'  },
   { city: 'Copenhagen', country: 'Denmark', countryNL: 'Denemarken', countryCode: 'DK', currencyCode: 'DKK', nationality: 'Nordic', locationType: 'Binnen Europa', hasBeach: true, isBusy: false, active: true, temperature: 'Gematigd'  },
   { city: 'Athens', country: 'Greece', countryNL: 'Griekenland', countryCode: 'GR', currencyCode: 'EUR', nationality: 'Greek', locationType: 'Binnen Europa', hasBeach: true, isBusy: true, active: true, temperature: 'Warm'  },
-  { city: 'Budapest', country: 'Hungary', countryNL: 'Hongarije', countryCode: 'HU', currencyCode: 'HUF', nationality: 'Eastern European', locationType: 'Binnen Europa', hasBeach: true, isBusy: false, active: true, temperature: 'Gematigd'  },
-  { city: 'Cape Town', country: 'South Africa', countryNL: 'Zuid-Afrika', countryCode: 'ZA', currencyCode: 'ZAR', nationality: 'African', locationType: 'Buiten Europa', hasBeach: true, isBusy: true, active: true, temperature: 'Warm'  },
-  { city: 'Dubai', country: 'United Arab Emirates', countryNL: 'Verenigde Arabische Emiraten', countryCode: 'AE', currencyCode: 'AED', nationality: 'Middle Eastern', locationType: 'Buiten Europa', hasBeach: true, isBusy: true, active: true, temperature: 'Warm'  },
-  { city: 'Seoul', country: 'South Korea', countryNL: 'Zuid-Korea', countryCode: 'KR', currencyCode: 'KRW', nationality: 'Korean', locationType: 'Buiten Europa', hasBeach: true, isBusy: true, active: true, temperature: 'Warm'  },
-  { city: 'Moscow', country: 'Russia', countryNL: 'Rusland', countryCode: 'RU', currencyCode: 'RUB', nationality: 'Russian', locationType: 'Buiten Europa', hasBeach: false, isBusy: true, active: true, temperature: 'Koel'  },
-  { city: 'Marrakech', country: 'Morocco', countryNL: 'Marokko', countryCode: 'MA', currencyCode: 'MAD', nationality: 'Moroccan', locationType: 'Buiten Europa', hasBeach: true, isBusy: true, active: true, temperature: 'Warm'  }
+  { city: 'Budapest', country: 'Hungary', countryNL: 'Hongarije', countryCode: 'HU', currencyCode: 'HUF', nationality: 'Eastern European', locationType: 'Binnen Europa', hasBeach: true, isBusy: false, active: true, temperature: 'Gematigd'  }
 ];
 
 
